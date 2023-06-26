@@ -56,7 +56,13 @@
 	text-align: center;
 	font-size: 64px;
 	line-height: 72px;
+	cursor: pointer;
+	transition: transform 0.3s ease 0s;
 }
+.difficulty__block:hover {
+	transform: scale(1.1);
+}
+
 .button {
 	display: flex;
 	width: 246px;
@@ -69,6 +75,9 @@
 	border-radius: 12px;
 	background:#7ac100;
 	align-items: center;
+}
+.button:hover {
+	background:#5c9100;
 }
 .popup__button {
 
