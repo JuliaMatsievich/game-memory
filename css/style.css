@@ -71,4 +71,32 @@
 	align-items: center;
 }
 .popup__button {
+
+}
+
+@media(max-width: 510px){
+	.popup {
+		width: 300px;
+		padding: 30px 50px;
+	}
+	.popup__title {
+		font-size: 30px;
+		line-height: 38px;
+		margin-bottom: 38px;
+	}
+	.difficulty__container {
+		column-gap: 16px;
+	}
+	.popup__content-difficulty {
+		margin-bottom: 47px;
+	}
+	.difficulty__block {
+		width: 78px;
+		height: 78px;
+		border-radius: 12px;
+		background: #fff;
+		text-align: center;
+		font-size: 44px;
+		line-height: 52px;
+	}
 }
