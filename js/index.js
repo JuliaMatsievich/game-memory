@@ -1,4 +1,4 @@
-import { CHANGE_DIFFICULTY_PAGE } from "./routes.js";
+import { CHANGE_DIFFICULTY_PAGE, GAME_PAGE } from "./routes.js";
 import { renderChangeDifficultyPage } from "./components/difficulty-page__component.js";
 
 const appEl = document.querySelector('.app');

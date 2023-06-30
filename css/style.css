@@ -67,6 +67,20 @@
 	display: none;
 }
 
+.difficulty__block input[type=radio]:checked + label {
+	background: #7ac100;
+}
+
+.difficulty__block_checked {
+	color: #fff;
+	background: #7ac100;
+	transform: scale(1.1)
+}
+
+.difficulty__block label {
+	cursor: pointer;
+}
+
 .button {
 	display: flex;
 	width: 246px;
