@@ -23,20 +23,28 @@ export const renderChangeDifficultyPage = (appEl) => {
 
 </div>
 	`
-appEl.innerHTML = changeDifficultyHtml;
+	appEl.innerHTML = changeDifficultyHtml;
 
 
-const difficultyContainer = document.querySelector('.difficulty__container');
-difficultyContainer.addEventListener('click', (event) => {
-	const target = event.target;
-	const difficultInput = target.querySelector('input');
-	const difficultBlock = target.closest('.difficulty__block');
 
-	difficultBlock.classList.toggle('difficulty__block_checked');
-	difficultInput.checked = !difficultInput.checked;
-	console.log(difficultInput.checked);
+	const difficultyContainer = document.querySelector('.difficulty__container');
+	difficultyContainer.addEventListener('click', (event) => {
+		const target = event.target;
 
-})
+		const difficultInputTarget = target.querySelector('input');
+
+		const difficultBlockTarget = target.closest('.difficulty__block');
+
+		const difficultInputs = document.querySelectorAll('.difficulty__input');
+
+		for (let difficultInput of difficultInputs) {
+			const difficultBlock = difficultInput.closest('.difficulty__block');
+			difficultBlock.classList.remove('difficulty__block_checked');
+			difficultInput.checked = false;
+			difficultBlockTarget.classList.add('difficulty__block_checked');
+			difficultInputTarget.checked = !difficultInputTarget.checked;
+		}
+	})
 
 
 }
