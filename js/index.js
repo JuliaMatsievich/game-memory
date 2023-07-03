@@ -4,11 +4,19 @@ import { renderGamePage } from "./components/game-page__component.js";
 
 const appEl = document.querySelector('.app');
 
+// const globalStage = {
+// 	time: time,
+// 	difficulty: difficulty,
+// 	status: status,
+// 	generateCards: generateCards,
+// 	changeCards: changeCards
+// }
+
 export const goToPage = (newPage, data) => {
-	if (newPage = CHANGE_DIFFICULTY_PAGE) {
+	if (newPage === CHANGE_DIFFICULTY_PAGE) {
 		renderChangeDifficultyPage(appEl)
 	}
-	if (newPage = GAME_PAGE) {
+	if (newPage === GAME_PAGE) {
 		renderGamePage(appEl, data);
 	}
 }
