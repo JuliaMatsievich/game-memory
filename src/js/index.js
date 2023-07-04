@@ -21,8 +21,4 @@ export const goToPage = (newPage, data) => {
    }
 };
 
-const func = (a, b) => {
-   return a + b + "";
-};
-
 goToPage(CHANGE_DIFFICULTY_PAGE);
