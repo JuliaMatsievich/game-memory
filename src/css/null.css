@@ -1,30 +1,24 @@
-/*Обнуляет внутренние, внешние отступы и границы*/
+/* Обнуляет внутренние, внешние отступы и границы */
 * {
    padding: 0;
    margin: 0;
    border: 0;
 }
 
-/*Меняет подсчет ширины блока */
+/* Меняет подсчет ширины блока */
 *,
-*:before,
-*:after {
-   -moz-box-sizing: border-box;
-   -webkit-box-sizing: border-box;
+*::before,
+*::after {
    box-sizing: border-box;
 }
 
-/*Убирает линии обводки некоторых браузеров*/
+/* Убирает линии обводки некоторых браузеров */
 :focus,
 :active {
    outline: none;
 }
-a:focus,
-a:active {
-   outline: none;
-}
 
-/*Делает эти тэги блочными*/
+/* Делает эти тэги блочными */
 nav,
 footer,
 header,
@@ -32,54 +26,55 @@ aside {
    display: block;
 }
 
-/*Параметры которые уравнивают поведение шрифтов и элементов для разных браузеров, в т.ч. запрещают самовольное увеличение шрифта на айфонах*/
+/* Параметры которые уравнивают поведение шрифтов и элементов для разных браузеров, в т.ч. запрещают самовольное увеличение шрифта на айфонах */
 html,
 body {
    height: 100%;
    width: 100%;
-   font-size: 100%;
    line-height: 1;
    font-size: 14px;
-   -ms-text-size-adjust: 100%;
-   -moz-text-size-adjust: 100%;
-   -webkit-text-size-adjust: 100%;
-   font-family: StratosSkyeng;
 }
 
-/*Наследование семейства шрифтов*/
+/* Наследование семейства шрифтов */
 input,
 button,
 textarea {
    font-family: inherit;
 }
 
-/*Уирает крестик в IE*/
+/* Уирает крестик в IE */
 input::-ms-clear {
    display: none;
 }
+
 button {
    cursor: pointer;
 }
-/*Убирает отступы в Firefox для кнопок*/
+
+/* Убирает отступы в Firefox для кнопок */
 button::-moz-focus-inner {
    padding: 0;
    border: 0;
 }
+
 a,
 a:visited {
    text-decoration: none;
 }
+
 a:hover {
    text-decoration: none;
 }
+
 ul li {
    list-style: none;
 }
+
 img {
    vertical-align: top;
 }
 
-/*Обнуляем заголовки*/
+/* Обнуляем заголовки */
 h1,
 h2,
 h3,
