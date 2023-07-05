@@ -38,12 +38,6 @@ export const renderGamePage = (appEl, difficultValue) => {
 
    const gameBlock = document.querySelector(".game");
 
-   const gameCardHtml = `
-      <div class="game__card">
-         <img src="./src/img/shirt.png" alt="">
-      </div>
-   `;
-
    if (difficultValue === "1") {
       let qtyCard = 12;
       getGameField(gameBlock, qtyCard);
