@@ -223,24 +223,9 @@
    grid-template: repeat(4, minmax(auto, 133px)) / repeat(9, minmax(30px, 95px));
 }
 
-/* .game {
-   display: flex;
-   flex-wrap: wrap;
-   gap: 15px;
-   justify-content: center;
-   align-content: center;
-   height: 100vh;
-   align-self: center;
+.game__card_open {
+   width: 95px;
+   height: 133px;
+   border-radius: 4px;
+   background: #fff;
 }
-
-.game__difficult_1 {
-   max-width: 315px;
-}
-
-.game__difficult_2 {
-   max-width: 425px;
-}
-
-.game__difficult_3 {
-   grid-template: repeat(3, 133px) / repeat(4, 95px);
-} */
