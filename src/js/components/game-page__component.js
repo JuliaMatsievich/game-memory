@@ -1,12 +1,11 @@
 import { cards } from "../routes.js";
 
 function randomInteger(min, max) {
-   // случайное число от min до (max+1)
    let rand = min + Math.random() * (max - min);
    return Math.floor(rand);
 }
 
-const gameFieldOpenCards = (gameBlock, qtyCard) => {
+const getGameFieldOpenCards = (gameBlock, qtyCard) => {
    const newCardsArr = [];
 
    for (let i = 1; i <= qtyCard; i++) {
@@ -70,7 +69,7 @@ export const renderGamePage = (appEl, difficultValue) => {
    const clickBtnStartGame = (gameBlock, qtyCard) => {
       const btnStartGame = document.querySelector(".button__start-game");
       btnStartGame.addEventListener("click", () => {
-         gameFieldOpenCards(gameBlock, qtyCard);
+         getGameFieldOpenCards(gameBlock, qtyCard);
          setTimeout(getGameField, 5000, gameBlock, qtyCard);
       });
    };
