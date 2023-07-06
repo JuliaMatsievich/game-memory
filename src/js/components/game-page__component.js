@@ -2,7 +2,7 @@ import { cards } from "../routes.js";
 
 function randomInteger(min, max) {
    // случайное число от min до (max+1)
-   let rand = min + Math.random() * (max + 1 - min);
+   let rand = min + Math.random() * (max - min);
    return Math.floor(rand);
 }
 
@@ -10,7 +10,7 @@ const gameFieldOpenCards = (gameBlock, qtyCard) => {
    const newCardsArr = [];
 
    for (let i = 1; i <= qtyCard; i++) {
-      newCardsArr.push(cards[randomInteger(1, qtyCard)]);
+      newCardsArr.push(cards[randomInteger(0, qtyCard)]);
    }
 
    const cardsHtmlArr = newCardsArr.map((card) => {
