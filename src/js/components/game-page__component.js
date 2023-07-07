@@ -8,11 +8,11 @@ function randomInteger(min, max) {
 const getGameFieldOpenCards = (gameBlock, qtyCard) => {
    const newCardsArr = [];
 
-   for (let i = 1; i <= qtyCard; i++) {
-      newCardsArr.push(cards[randomInteger(0, qtyCard)]);
+   for (let i = 1; i <= qtyCard / 2; i++) {
+      newCardsArr.push(cards[randomInteger(0, 35)]);
    }
 
-   const cardsHtmlArr = newCardsArr.map((card) => {
+   const cardsHtmlArr = [...newCardsArr, ...newCardsArr].map((card) => {
       return `
       <div class="game__card">
       ${card}

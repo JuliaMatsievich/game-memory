@@ -211,11 +211,11 @@
 }
 
 .game__difficult_1 {
-   grid-template: repeat(3, minmax(auto, 133px)) / repeat(3, minmax(30px, 95px));
+   grid-template: repeat(3, minmax(auto, 133px)) / repeat(4, minmax(30px, 95px));
 }
 
 .game__difficult_2 {
-   grid-template: repeat(3, minmax(auto, 133px)) / repeat(4, minmax(30px, 95px));
+   grid-template: repeat(3, minmax(auto, 133px)) / repeat(6, minmax(30px, 95px));
    grid-auto-flow: row;
 }
 
