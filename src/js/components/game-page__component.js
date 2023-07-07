@@ -1,11 +1,11 @@
 import { cards } from "../routes.js";
 
-const randomInteger = (min, max) => {
+export const randomInteger = (min, max) => {
    let rand = min + Math.random() * (max - min);
    return Math.floor(rand);
 };
 
-const shuffle = (arr) => {
+export const shuffle = (arr) => {
    let j, temp;
    for (let i = arr.length - 1; i > 0; i--) {
       j = Math.floor(Math.random() * (i + 1));
@@ -16,42 +16,32 @@ const shuffle = (arr) => {
    return arr;
 };
 
-const getGameFieldOpenCards = (gameBlock, qtyCard) => {
+const generatedCards = (qtyCard) => {
    const newCardsArr = [];
 
    for (let i = 1; i <= qtyCard / 2; i++) {
       newCardsArr.push(cards[randomInteger(0, 35)]);
    }
+   return shuffle([...newCardsArr, ...newCardsArr]);
+};
 
-   const cardsHtmlArr = [...newCardsArr, ...newCardsArr].map((card) => {
+const renderGameField = ({ gameBlock, isOpenCard, isCloseCard, newCards }) => {
+   const cardsHtmlArr = newCards.map((card) => {
       return `
       <div class="game__card">
-      ${card}
+      <img src="./src/img/shirt.png" alt="" class="card__shirt ${
+         isOpenCard ? "hidden" : ""
+      }">
+      <img src="${card}" alt="" class="card__open ${
+         isCloseCard ? "hidden" : ""
+      }">
       </div>
    `;
    });
 
-   const cardsHtml = shuffle(cardsHtmlArr).join("");
+   const cardsHtml = cardsHtmlArr.join("");
 
    gameBlock.innerHTML = cardsHtml;
-};
-
-const getGameField = (gameBlock, qtyCard) => {
-   const gameCardHtml = `
-   <div class="game__card">
-      <img src="./src/img/shirt.png" alt="">
-   </div>
-`;
-
-   let gameDifficultyarr = [];
-
-   for (let i = 1; i <= qtyCard; i++) {
-      gameDifficultyarr.push(gameCardHtml);
-   }
-
-   const gameDifficultyHtml = gameDifficultyarr.join("");
-
-   gameBlock.innerHTML = gameDifficultyHtml;
 };
 
 export const renderGamePage = (appEl, difficultValue) => {
@@ -77,32 +67,71 @@ export const renderGamePage = (appEl, difficultValue) => {
 
    const gameBlock = document.querySelector(".game");
 
-   const clickBtnStartGame = (gameBlock, qtyCard) => {
+   const clickBtnStartGame = (gameBlock) => {
       const btnStartGame = document.querySelector(".button__start-game");
       btnStartGame.addEventListener("click", () => {
-         getGameFieldOpenCards(gameBlock, qtyCard);
-         setTimeout(getGameField, 5000, gameBlock, qtyCard);
+         renderGameField({
+            gameBlock,
+            isCloseCard: false,
+            isOpenCard: true,
+            newCards: window.application.newCards,
+         });
+
+         setTimeout(renderGameField, 5000, {
+            gameBlock,
+            isCloseCard: true,
+            isOpenCard: false,
+            newCards: window.application.newCards,
+         });
       });
    };
 
+   // const clickCard = () => {
+   //    const cardBlock = document.querySelector(".game");
+
+   //    cardBlock.addEventListener("click", (event) => {
+   //       const target = event.target;
+   //       console.log(target);
+   //    });
+   // };
+
    if (difficultValue === "1") {
       let qtyCard = 12;
-      getGameField(gameBlock, qtyCard);
+      window.application.newCards = generatedCards(qtyCard);
+      renderGameField({
+         gameBlock,
+         isCloseCard: true,
+         isOpenCard: false,
+         newCards: window.application.newCards,
+      });
       gameBlock.classList.add("game__difficult_1");
       clickBtnStartGame(gameBlock, qtyCard);
+      // clickCard();
    }
 
    if (difficultValue === "2") {
       let qtyCard = 18;
-      getGameField(gameBlock, qtyCard);
+      getGameField({
+         gameBlock,
+         qtyCard,
+         isCloseCard: true,
+         isOpenCard: false,
+      });
       gameBlock.classList.add("game__difficult_2");
-      clickBtnStartGame(gameBlock, qtyCard);
+      // clickBtnStartGame(gameBlock, qtyCard);
+      // clickCard();
    }
 
    if (difficultValue === "3") {
       let qtyCard = 36;
-      getGameField(gameBlock, qtyCard);
+      getGameField({
+         gameBlock,
+         qtyCard,
+         isCloseCard: true,
+         isOpenCard: false,
+      });
       gameBlock.classList.add("game__difficult_3");
-      clickBtnStartGame(gameBlock, qtyCard);
+      // clickBtnStartGame(gameBlock, qtyCard);
+      // clickCard();
    }
 };
