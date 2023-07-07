@@ -86,15 +86,25 @@ export const renderGamePage = (appEl, difficultValue) => {
       });
    };
 
-   // const clickCard = () => {
-   //    const cardBlock = document.querySelector(".game");
+   const clickCard = () => {
+      const cardBlock = document.querySelector(".game");
 
-   //    cardBlock.addEventListener("click", (event) => {
-   //       const target = event.target;
-   //       console.log(target);
-   //    });
-   // };
-   
+      cardBlock.addEventListener("click", (event) => {
+         const target = event.target;
+         const gameCard = target.closest(".game__card");
+         const cardClose = gameCard.querySelector(".card__shirt");
+         const cardOpen = gameCard.querySelector(".card__open");
+         if (target.classList.contains("card__shirt")) {
+            cardClose.classList.add("hidden");
+            cardOpen.classList.remove("hidden");
+         }
+         if (target.classList.contains("card__open")) {
+            cardClose.classList.remove("hidden");
+            cardOpen.classList.add("hidden");
+         }
+      });
+   };
+
    let qtyCard = "";
 
    if (difficultValue === "1") {
@@ -118,4 +128,5 @@ export const renderGamePage = (appEl, difficultValue) => {
    });
    gameBlock.classList.add(`game__difficult_${difficultValue}`);
    clickBtnStartGame(gameBlock);
+   clickCard();
 };
