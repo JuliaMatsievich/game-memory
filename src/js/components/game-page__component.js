@@ -1,9 +1,20 @@
 import { cards } from "../routes.js";
 
-function randomInteger(min, max) {
+const randomInteger = (min, max) => {
    let rand = min + Math.random() * (max - min);
    return Math.floor(rand);
-}
+};
+
+const shuffle = (arr) => {
+   let j, temp;
+   for (let i = arr.length - 1; i > 0; i--) {
+      j = Math.floor(Math.random() * (i + 1));
+      temp = arr[j];
+      arr[j] = arr[i];
+      arr[i] = temp;
+   }
+   return arr;
+};
 
 const getGameFieldOpenCards = (gameBlock, qtyCard) => {
    const newCardsArr = [];
@@ -20,7 +31,7 @@ const getGameFieldOpenCards = (gameBlock, qtyCard) => {
    `;
    });
 
-   const cardsHtml = cardsHtmlArr.join("");
+   const cardsHtml = shuffle(cardsHtmlArr).join("");
 
    gameBlock.innerHTML = cardsHtml;
 };
