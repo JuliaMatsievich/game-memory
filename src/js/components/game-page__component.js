@@ -94,44 +94,28 @@ export const renderGamePage = (appEl, difficultValue) => {
    //       console.log(target);
    //    });
    // };
+   
+   let qtyCard = "";
 
    if (difficultValue === "1") {
-      let qtyCard = 12;
-      window.application.newCards = generatedCards(qtyCard);
-      renderGameField({
-         gameBlock,
-         isCloseCard: true,
-         isOpenCard: false,
-         newCards: window.application.newCards,
-      });
-      gameBlock.classList.add("game__difficult_1");
-      clickBtnStartGame(gameBlock, qtyCard);
-      // clickCard();
+      qtyCard = 12;
    }
 
    if (difficultValue === "2") {
-      let qtyCard = 18;
-      getGameField({
-         gameBlock,
-         qtyCard,
-         isCloseCard: true,
-         isOpenCard: false,
-      });
-      gameBlock.classList.add("game__difficult_2");
-      // clickBtnStartGame(gameBlock, qtyCard);
-      // clickCard();
+      qtyCard = 18;
    }
 
    if (difficultValue === "3") {
-      let qtyCard = 36;
-      getGameField({
-         gameBlock,
-         qtyCard,
-         isCloseCard: true,
-         isOpenCard: false,
-      });
-      gameBlock.classList.add("game__difficult_3");
-      // clickBtnStartGame(gameBlock, qtyCard);
-      // clickCard();
+      qtyCard = 36;
    }
+
+   window.application.newCards = generatedCards(qtyCard);
+   renderGameField({
+      gameBlock,
+      isCloseCard: true,
+      isOpenCard: false,
+      newCards: window.application.newCards,
+   });
+   gameBlock.classList.add(`game__difficult_${difficultValue}`);
+   clickBtnStartGame(gameBlock);
 };
