@@ -1,8 +1,6 @@
 import { goToPage } from "../index.js";
 import { GAME_PAGE } from "../routes.js";
 
-let difficultValue;
-
 export const renderChangeDifficultyPage = (appEl) => {
    const changeDifficultyHtml = `
       <div class="app__popup">
@@ -34,7 +32,7 @@ export const renderChangeDifficultyPage = (appEl) => {
       const target = event.target;
 
       const difficultInputTarget = target.querySelector("input");
-      difficultValue = difficultInputTarget.getAttribute("value");
+      window.application.level = difficultInputTarget.getAttribute("value");
 
       const difficultBlockTarget = target.closest(".difficulty__block");
 
@@ -52,17 +50,6 @@ export const renderChangeDifficultyPage = (appEl) => {
    const startBtn = document.querySelector(".start__button");
 
    startBtn.addEventListener("click", () => {
-      goToPage(GAME_PAGE, difficultValue);
-      // if (difficultValue === '1') {
-      // 	goToPage(GAME_PAGE, difficultValue);
-      // }
-
-      // if (difficultValue === '2') {
-      // 	console.log('второй уровень');
-      // }
-
-      // if (difficultValue === '3') {
-      // 	console.log('третий уровень');
-      // }
+      goToPage(GAME_PAGE, window.application.level);
    });
 };
