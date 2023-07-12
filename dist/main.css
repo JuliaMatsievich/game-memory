@@ -1,0 +1,332 @@
+/*!*********************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/css/style.css ***!
+  \*********************************************************************/
+@font-face {
+   font-family: StratosSkyeng;
+   font-style: normal;
+   font-weight: 400;
+   font-display: swap;
+   src: url(ce93393e831d32412096.woff2) format("woff2");
+}
+
+.app {
+   background-color: #004980;
+   width: 100%;
+   height: 100vh;
+   padding: 41px 26px;
+}
+
+.app__popup {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100vh;
+}
+
+.app__game {
+   height: 100vh;
+   display: flex;
+   flex-direction: column;
+}
+
+.popup {
+   width: 480px;
+   border-radius: 12px;
+   background: #c2f5ff;
+   padding: 50px 70px;
+}
+
+.popup__container {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.popup__title {
+   color: #004980;
+   text-align: center;
+   font-size: 40px;
+   line-height: 48px;
+   margin-bottom: 48px;
+}
+
+.popup__content-difficulty {
+   margin-bottom: 67px;
+}
+
+.difficulty__container {
+   display: flex;
+   column-gap: 26px;
+}
+
+.difficulty__block {
+   color: #0080c1;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 98px;
+   height: 98px;
+   border-radius: 12px;
+   background: #fff;
+   text-align: center;
+   font-size: 64px;
+   line-height: 72px;
+   cursor: pointer;
+   transition: transform 0.3s ease 0s;
+}
+
+.difficulty__block:hover {
+   transform: scale(1.1);
+}
+
+.difficulty__block input[type="radio"] {
+   display: none;
+}
+
+.difficulty__block label {
+   cursor: pointer;
+}
+
+.difficulty__block input[type="radio"]:checked + label {
+   background: #7ac100;
+}
+
+.difficulty__block_checked {
+   color: #fff;
+   background: #7ac100;
+   transform: scale(1.1);
+}
+
+.button {
+   display: flex;
+   width: 246px;
+   height: 48px;
+   justify-content: center;
+   color: #fff;
+   text-align: center;
+   font-size: 24px;
+   line-height: 32px;
+   border-radius: 12px;
+   background: #7ac100;
+   align-items: center;
+}
+
+.button:hover {
+   background: #5c9100;
+}
+
+@media (width <= 510px) {
+   .popup {
+      width: 300px;
+      padding: 30px 50px;
+   }
+
+   .popup__title {
+      font-size: 30px;
+      line-height: 38px;
+      margin-bottom: 38px;
+   }
+
+   .difficulty__container {
+      column-gap: 16px;
+   }
+
+   .popup__content-difficulty {
+      margin-bottom: 47px;
+   }
+
+   .difficulty__block {
+      width: 78px;
+      height: 78px;
+      border-radius: 12px;
+      background: #fff;
+      text-align: center;
+      font-size: 44px;
+      line-height: 52px;
+   }
+}
+
+.header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-bottom: 48px;
+}
+
+.header__time {
+}
+
+.time__name {
+   color: #fff;
+   font-size: 16px;
+   font-weight: 400;
+   line-height: 32px;
+}
+
+.time__min,
+.time__sek,
+.time__point {
+   color: #fff;
+   font-size: 64px;
+   font-weight: 400;
+   line-height: 72px;
+   position: relative;
+}
+
+.time__min::before,
+.time__sek::before {
+   position: absolute;
+   color: #fff;
+   font-size: 16px;
+   font-weight: 400;
+   line-height: 32px;
+   right: 5px;
+   top: -16px;
+}
+
+.time__min::before {
+   content: "min";
+}
+
+.time__sek::before {
+   content: "sek";
+}
+
+.game {
+   display: grid;
+   gap: 15px;
+   justify-content: center;
+   align-content: center;
+   height: 100vh;
+}
+
+.game__card {
+   position: relative;
+}
+
+.game__card img {
+   position: absolute;
+   object-fit: contain;
+   width: 100%;
+   height: 100%;
+   top: 0;
+   left: 0;
+}
+
+.game__difficult_1 {
+   grid-template: repeat(3, minmax(auto, 133px)) / repeat(4, minmax(30px, 95px));
+}
+
+.game__difficult_2 {
+   grid-template: repeat(3, minmax(auto, 133px)) / repeat(6, minmax(30px, 95px));
+   grid-auto-flow: row;
+}
+
+.game__difficult_3 {
+   grid-template: repeat(4, minmax(auto, 133px)) / repeat(9, minmax(30px, 95px));
+}
+
+.game__card_open {
+   width: 95px;
+   height: 133px;
+   border-radius: 4px;
+   background: #fff;
+}
+
+.hidden {
+   display: none;
+}
+
+/*!********************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/css/null.css ***!
+  \********************************************************************/
+/* Обнуляет внутренние, внешние отступы и границы */
+* {
+   padding: 0;
+   margin: 0;
+   border: 0;
+}
+
+/* Меняет подсчет ширины блока */
+*,
+*::before,
+*::after {
+   box-sizing: border-box;
+}
+
+/* Убирает линии обводки некоторых браузеров */
+:focus,
+:active {
+   outline: none;
+}
+
+/* Делает эти тэги блочными */
+nav,
+footer,
+header,
+aside {
+   display: block;
+}
+
+/* Параметры которые уравнивают поведение шрифтов и элементов для разных браузеров, в т.ч. запрещают самовольное увеличение шрифта на айфонах */
+html,
+body {
+   height: 100%;
+   width: 100%;
+   line-height: 1;
+   font-size: 14px;
+   font-family: StratosSkyeng, sans-serif;
+}
+
+/* Наследование семейства шрифтов */
+input,
+button,
+textarea {
+   font-family: inherit;
+}
+
+/* Уирает крестик в IE */
+input::-ms-clear {
+   display: none;
+}
+
+button {
+   cursor: pointer;
+}
+
+/* Убирает отступы в Firefox для кнопок */
+button::-moz-focus-inner {
+   padding: 0;
+   border: 0;
+}
+
+a,
+a:visited {
+   text-decoration: none;
+}
+
+a:hover {
+   text-decoration: none;
+}
+
+ul li {
+   list-style: none;
+}
+
+img {
+   vertical-align: top;
+}
+
+/* Обнуляем заголовки */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+   font-size: inherit;
+   font-weight: 400;
+}
+
+
+/*# sourceMappingURL=main.css.map*/

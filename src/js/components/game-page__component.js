@@ -1,4 +1,4 @@
-import { cards } from "../routes.js";
+import { cards, pathToCard } from "../routes.js";
 
 export const randomInteger = (min, max) => {
    let rand = min + Math.random() * (max - min);
@@ -29,7 +29,7 @@ const renderGameField = ({ gameBlock, isOpenCard, isCloseCard, newCards }) => {
    const cardsHtmlArr = newCards.map((card) => {
       return `
       <div class="game__card">
-      <img src="./src/img/shirt.png" alt="" class="card__shirt ${
+      <img src="${pathToCard}/shirt.png" alt="" class="card__shirt ${
          isOpenCard ? "hidden" : ""
       }">
       <img src="${card}" alt="" class="card__open ${
@@ -85,22 +85,29 @@ export const renderGamePage = (appEl, difficultValue) => {
          });
       });
    };
-
+   const cardsOpenArr = [];
    const clickCard = () => {
       const cardBlock = document.querySelector(".game");
-
+      let counter = 0;
       cardBlock.addEventListener("click", (event) => {
          const target = event.target;
          const gameCard = target.closest(".game__card");
          const cardClose = gameCard.querySelector(".card__shirt");
          const cardOpen = gameCard.querySelector(".card__open");
+         const cardsSrc = cardOpen.getAttribute("src");
+         cardsOpenArr.push(cardsSrc);
          if (target.classList.contains("card__shirt")) {
             cardClose.classList.add("hidden");
             cardOpen.classList.remove("hidden");
          }
-         if (target.classList.contains("card__open")) {
-            cardClose.classList.remove("hidden");
-            cardOpen.classList.add("hidden");
+         counter += 1;
+
+         if (counter === 2) {
+            if (cardsOpenArr[0] === cardsOpenArr[1]) {
+               setTimeout(alert, 500, "Вы выиграли");
+            } else {
+               setTimeout(alert, 500, "Вы проиграли");
+            }
          }
       });
    };
