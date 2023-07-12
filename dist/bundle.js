@@ -310,7 +310,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 const CHANGE_DIFFICULTY_PAGE = "change_difficulty";
 const GAME_PAGE = "game";
-const pathToCard = "./src/static/img";
+const pathToCard = "./static/img";
 const cards = [
    `${pathToCard}/туз пики.png`,
    `${pathToCard}/король пики.png`,
