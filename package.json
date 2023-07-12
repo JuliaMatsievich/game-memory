@@ -1,0 +1,34 @@
+{
+  "name": "game-memory",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --write ./src/",
+    "lint:js": "eslint ./src/**/*.js",
+    "lint:css": "stylelint ./src/**/*.css",
+    "prepare": "husky install",
+    "lint": "npm run lint:js && npm run lint:css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JuliaMatsievich/game-memory.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JuliaMatsievich/game-memory/issues"
+  },
+  "homepage": "https://github.com/JuliaMatsievich/game-memory#readme",
+  "devDependencies": {
+    "eslint": "^8.44.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.3",
+    "prettier": "^2.8.8",
+    "stylelint": "^15.9.0",
+    "stylelint-config-standard": "^33.0.0",
+    "stylelint-prettier": "^3.0.0"
+  }
+}
