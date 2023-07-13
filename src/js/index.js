@@ -1,11 +1,14 @@
 import { CHANGE_DIFFICULTY_PAGE, GAME_PAGE } from "./routes.js";
 import { renderChangeDifficultyPage } from "./components/difficulty-page__component.js";
 import { renderGamePage } from "./components/game-page__component.js";
+import "../css/style.css";
+import "../css/null.css";
 
 const appEl = document.querySelector(".app");
 
 window.application = {
    level: "",
+   newCards: "",
 };
 
 export const goToPage = (newPage, data) => {
