@@ -86,6 +86,9 @@ export const renderGamePage = (appEl, difficultValue) => {
       });
    };
    const cardsOpenArr = [];
+   const cardsOpenArrSrc = [];
+   let tryCounter = 0;
+   let openCardCounter = 0;
    const clickCard = () => {
       const cardBlock = document.querySelector(".game");
       let counter = 0;
@@ -95,7 +98,8 @@ export const renderGamePage = (appEl, difficultValue) => {
          const cardClose = gameCard.querySelector(".card__shirt");
          const cardOpen = gameCard.querySelector(".card__open");
          const cardsSrc = cardOpen.getAttribute("src");
-         cardsOpenArr.push(cardsSrc);
+         cardsOpenArr.push(gameCard);
+         cardsOpenArrSrc.push(cardsSrc);
          if (target.classList.contains("card__shirt")) {
             cardClose.classList.add("hidden");
             cardOpen.classList.remove("hidden");
@@ -103,10 +107,41 @@ export const renderGamePage = (appEl, difficultValue) => {
          counter += 1;
 
          if (counter === 2) {
-            if (cardsOpenArr[0] === cardsOpenArr[1]) {
-               setTimeout(alert, 500, "Вы выиграли");
+            if (cardsOpenArrSrc[0] === cardsOpenArrSrc[1]) {
+               counter = 0;
+               cardsOpenArr.splice(0, 2);
+               cardsOpenArrSrc.splice(0, 2);
+               tryCounter = 0;
+               openCardCounter += 2;
+               if (openCardCounter === window.application.newCards.length) {
+                  setTimeout(alert, 500, "Вы выиграли");
+               }
             } else {
-               setTimeout(alert, 500, "Вы проиграли");
+               counter = 0;
+               tryCounter += 1;
+               setTimeout(() => {
+                  cardsOpenArr[0]
+                     .querySelector(".card__shirt")
+                     .classList.remove("hidden");
+                  cardsOpenArr[1]
+                     .querySelector(".card__shirt")
+                     .classList.remove("hidden");
+                  cardsOpenArr[0]
+                     .querySelector(".card__open")
+                     .classList.add("hidden");
+                  cardsOpenArr[1]
+                     .querySelector(".card__open")
+                     .classList.add("hidden");
+               }, 600);
+
+               setTimeout(() => {
+                  cardsOpenArr.splice(0, 2);
+                  cardsOpenArrSrc.splice(0, 2);
+               }, 700);
+
+               if (tryCounter === 3) {
+                  setTimeout(alert, 500, "Вы проиграли");
+               }
             }
          }
       });
