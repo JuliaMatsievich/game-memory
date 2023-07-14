@@ -1,7 +1,7 @@
 import { goToPage } from "../index.js";
 import { GAME_PAGE } from "../routes.js";
 
-export const renderChangeDifficultyPage = (appEl) => {
+export const renderChangeDifficultyPage = (appEl:Element) => {
    const changeDifficultyHtml = `
       <div class="app__popup">
          <div class="popup">
@@ -29,28 +29,28 @@ export const renderChangeDifficultyPage = (appEl) => {
    const startBtn = document.querySelector(".start__button");
 
    const difficultyContainer = document.querySelector(".difficulty__container");
-   difficultyContainer.addEventListener("click", (event) => {
-      startBtn.classList.remove("disabled");
-      startBtn.disabled = false;
-      const target = event.target;
+   difficultyContainer?.addEventListener("click", (event) => {
+      startBtn?.classList.remove("disabled");
+      (startBtn  as HTMLButtonElement).disabled = false;
+      const target = event.target as Element;
 
-      const difficultInputTarget = target.querySelector("input");
-      window.application.level = difficultInputTarget.getAttribute("value");
+      const difficultInputTarget = target?.querySelector("input");
+      window.application.level = difficultInputTarget?.getAttribute("value") as string;
 
-      const difficultBlockTarget = target.closest(".difficulty__block");
+      const difficultBlockTarget = target?.closest(".difficulty__block");
 
       const difficultInputs = document.querySelectorAll(".difficulty__input");
 
-      for (let difficultInput of difficultInputs) {
+      difficultInputs.forEach(difficultInput => {
          const difficultBlock = difficultInput.closest(".difficulty__block");
-         difficultBlock.classList.remove("difficulty__block_checked");
-         difficultInput.checked = false;
-         difficultBlockTarget.classList.add("difficulty__block_checked");
-         difficultInputTarget.checked = !difficultInputTarget.checked;
-      }
+         difficultBlock?.classList.remove("difficulty__block_checked");
+        (difficultInput as HTMLInputElement).checked  = false;
+         difficultBlockTarget?.classList.add("difficulty__block_checked");
+         (difficultInputTarget as HTMLInputElement).checked = !(difficultInputTarget as HTMLInputElement).checked;
+      })
    });
 
-   startBtn.addEventListener("click", () => {
+   startBtn?.addEventListener("click", () => {
       goToPage(GAME_PAGE, window.application.level);
    });
 };

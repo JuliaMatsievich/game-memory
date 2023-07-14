@@ -1,12 +1,12 @@
 import { FINAL_PAGE, cards, pathToCard } from "../routes.js";
 import { goToPage } from "../index.js";
 
-export const randomInteger = (min, max) => {
+export const randomInteger = (min: number, max: number) => {
    let rand = min + Math.random() * (max - min);
    return Math.floor(rand);
 };
 
-export const shuffle = (arr) => {
+export const shuffle = (arr: Array<any>) => {
    let j, temp;
    for (let i = arr.length - 1; i > 0; i--) {
       j = Math.floor(Math.random() * (i + 1));
@@ -16,28 +16,28 @@ export const shuffle = (arr) => {
    }
    return arr;
 };
-let sec = 0;
-let min = 0;
+let sec: number = 0;
+let min: number = 0;
 
-const timer = (minBlock, secBlock) => {
+const timer = (minBlock: Element, secBlock: Element) => {
    sec++;
    if (sec === 60) {
       min++;
       sec = 0;
    }
-   secBlock.textContent = "0" + sec;
+   secBlock.textContent = "0" + <string>(<any>sec);
    if (sec > 9) {
-      secBlock.textContent = sec;
+      secBlock.textContent = <string>(<any>sec);
    }
-   minBlock.textContent = "0" + min;
+   minBlock.textContent = "0" + <string>(<any>min);
    if (min > 9) {
-      minBlock.textContent = min;
+      minBlock.textContent = <string>(<any>min);
    }
 };
 
-let timerId;
+let timerId: Number;
 
-const generatedCards = (qtyCard) => {
+const generatedCards = (qtyCard: number) => {
    const newCardsArr = [];
 
    for (let i = 1; i <= qtyCard / 2; i++) {
@@ -46,15 +46,15 @@ const generatedCards = (qtyCard) => {
    return shuffle([...newCardsArr, ...newCardsArr]);
 };
 
-const renderGameField = ({ gameBlock, isOpenCard, isCloseCard, newCards }) => {
-   const cardsHtmlArr = newCards.map((card) => {
+const renderGameField = (render: Render) => {
+   const cardsHtmlArr = render.newCards.map((card: string) => {
       return `
       <div class="game__card">
       <img src="${pathToCard}/shirt.png" alt="" class="card__shirt ${
-         isOpenCard ? "hidden" : ""
+         render.isOpenCard ? "hidden" : ""
       }">
       <img src="${pathToCard}/${card}" alt="" class="card__open ${
-         isCloseCard ? "hidden" : ""
+         render.isCloseCard ? "hidden" : ""
       }">
       </div>
    `;
@@ -62,10 +62,10 @@ const renderGameField = ({ gameBlock, isOpenCard, isCloseCard, newCards }) => {
 
    const cardsHtml = cardsHtmlArr.join("");
 
-   gameBlock.innerHTML = cardsHtml;
+   render.gameBlock.innerHTML = cardsHtml;
 };
 
-export const renderGamePage = (appEl, difficultValue) => {
+export const renderGamePage = (appEl: Element, difficultValue: String) => {
    const gameHtml = `
    <div class="app__game">
       <div class="header">
@@ -90,9 +90,9 @@ export const renderGamePage = (appEl, difficultValue) => {
    const gameBlock = document.querySelector(".game");
    const minBlock = document.querySelector(".time__min");
    const secBlock = document.querySelector(".time__sec");
-   const clickBtnStartGame = (gameBlock) => {
+   const clickBtnStartGame = (gameBlock: Element) => {
       const btnStartGame = document.querySelector(".button__start-game");
-      btnStartGame.addEventListener("click", () => {
+      btnStartGame?.addEventListener("click", () => {
          renderGameField({
             gameBlock,
             isCloseCard: false,
@@ -113,24 +113,24 @@ export const renderGamePage = (appEl, difficultValue) => {
          timerId = setInterval(timer, 1000, minBlock, secBlock);
       });
    };
-   const cardsOpenArr = [];
-   const cardsOpenArrSrc = [];
+   const cardsOpenArr: Array<Element> = [];
+   const cardsOpenArrSrc: Array<string> = [];
    let tryCounter = 0;
    let openCardCounter = 0;
    const clickCard = () => {
       const cardBlock = document.querySelector(".game");
       let counter = 0;
-      cardBlock.addEventListener("click", (event) => {
-         const target = event.target;
+      cardBlock?.addEventListener("click", (event) => {
+         const target = event.target as Element;
          const gameCard = target.closest(".game__card");
-         const cardClose = gameCard.querySelector(".card__shirt");
-         const cardOpen = gameCard.querySelector(".card__open");
-         const cardsSrc = cardOpen.getAttribute("src");
-         cardsOpenArr.push(gameCard);
-         cardsOpenArrSrc.push(cardsSrc);
+         const cardClose = gameCard?.querySelector(".card__shirt");
+         const cardOpen = gameCard?.querySelector(".card__open");
+         const cardsSrc = cardOpen?.getAttribute("src");
+         cardsOpenArr.push(gameCard as Element);
+         cardsOpenArrSrc.push(cardsSrc as string);
          if (target.classList.contains("card__shirt")) {
-            cardClose.classList.add("hidden");
-            cardOpen.classList.remove("hidden");
+            cardClose?.classList.add("hidden");
+            cardOpen?.classList.remove("hidden");
          }
          counter += 1;
 
@@ -142,11 +142,11 @@ export const renderGamePage = (appEl, difficultValue) => {
                tryCounter = 0;
                openCardCounter += 2;
                if (openCardCounter === window.application.newCards.length) {
-                  clearInterval(timerId);
-                  window.application.time = `${minBlock.textContent}:${secBlock.textContent}`;
+                  clearInterval(timerId as number);
+                  window.application.time = `${minBlock?.textContent}:${secBlock?.textContent}`;
                   window.application.status = "win";
                   renderGameField({
-                     gameBlock,
+                     gameBlock: gameBlock as Element,
                      isCloseCard: false,
                      isOpenCard: true,
                      newCards: window.application.newCards,
@@ -157,17 +157,17 @@ export const renderGamePage = (appEl, difficultValue) => {
                counter = 0;
                tryCounter += 1;
                setTimeout(() => {
-                  cardsOpenArr[0]
-                     .querySelector(".card__shirt")
+                  (cardsOpenArr[0]
+                     .querySelector(".card__shirt") as Element)
                      .classList.remove("hidden");
-                  cardsOpenArr[1]
-                     .querySelector(".card__shirt")
+                  (cardsOpenArr[1]
+                     .querySelector(".card__shirt")  as Element)
                      .classList.remove("hidden");
-                  cardsOpenArr[0]
-                     .querySelector(".card__open")
+                  (cardsOpenArr[0]
+                     .querySelector(".card__open") as Element)
                      .classList.add("hidden");
-                  cardsOpenArr[1]
-                     .querySelector(".card__open")
+                  (cardsOpenArr[1]
+                     .querySelector(".card__open") as Element)
                      .classList.add("hidden");
                }, 600);
 
@@ -177,11 +177,11 @@ export const renderGamePage = (appEl, difficultValue) => {
                }, 700);
 
                if (tryCounter === 3) {
-                  clearInterval(timerId);
-                  window.application.time = `${minBlock.textContent}:${secBlock.textContent}`;
+                  clearInterval(timerId as number);
+                  window.application.time = `${minBlock?.textContent}:${secBlock?.textContent}`;
                   window.application.status = "lost";
                   renderGameField({
-                     gameBlock,
+                     gameBlock: gameBlock as Element,
                      isCloseCard: false,
                      isOpenCard: true,
                      newCards: window.application.newCards,
@@ -193,7 +193,7 @@ export const renderGamePage = (appEl, difficultValue) => {
       });
    };
 
-   let qtyCard = "";
+   let qtyCard: number = 0;
 
    if (difficultValue === "1") {
       qtyCard = 12;
@@ -209,12 +209,12 @@ export const renderGamePage = (appEl, difficultValue) => {
 
    window.application.newCards = generatedCards(qtyCard);
    renderGameField({
-      gameBlock,
+      gameBlock: gameBlock as Element,
       isCloseCard: true,
       isOpenCard: false,
       newCards: window.application.newCards,
    });
-   gameBlock.classList.add(`game__difficult_${difficultValue}`);
-   clickBtnStartGame(gameBlock);
+   gameBlock?.classList.add(`game__difficult_${difficultValue}`);
+   clickBtnStartGame(gameBlock as Element);
    clickCard();
 };

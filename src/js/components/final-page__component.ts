@@ -1,7 +1,7 @@
 import { goToPage } from "..";
 import { CHANGE_DIFFICULTY_PAGE } from "../routes";
 
-export const renderFinalPage = (appEl) => {
+export const renderFinalPage = (appEl:Element) => {
    const status = window.application.status;
    const finalPageHtml = `
 		<div class="app__fon"></div>
@@ -25,7 +25,7 @@ export const renderFinalPage = (appEl) => {
    appEl.insertAdjacentHTML("beforeend", finalPageHtml);
 
    const btnStartAgain = document.querySelector(".button__start-again");
-   btnStartAgain.addEventListener("click", () => {
+   btnStartAgain?.addEventListener("click", () => {
       goToPage(CHANGE_DIFFICULTY_PAGE);
    });
 };

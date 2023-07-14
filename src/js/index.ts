@@ -9,20 +9,20 @@ const appEl = document.querySelector(".app");
 
 window.application = {
    level: "",
-   newCards: "",
+   newCards: [],
    time: "00.00",
    status: "",
 };
 
-export const goToPage = (newPage, data) => {
+export const goToPage = (newPage: string, data?:string) => {
    if (newPage === CHANGE_DIFFICULTY_PAGE) {
-      renderChangeDifficultyPage(appEl);
+      renderChangeDifficultyPage(appEl  as Element);
    }
    if (newPage === GAME_PAGE) {
-      renderGamePage(appEl, data);
+      renderGamePage(appEl as Element, data as string);
    }
    if (newPage === FINAL_PAGE) {
-      renderFinalPage(appEl);
+      renderFinalPage(appEl as Element);
    }
 };
 

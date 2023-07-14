@@ -7,7 +7,7 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const isProduction = process.env.NODE_ENV === "production";
 
 module.exports = {
-   entry: "./src/js/index.js",
+   entry: "./src/js/index.ts",
    mode: isProduction ? "production" : "development",
    module: {
       rules: [
