@@ -1,4 +1,5 @@
-import { cards, pathToCard } from "../routes.js";
+import { FINAL_PAGE, cards, pathToCard } from "../routes.js";
+import { goToPage } from "../index.js";
 
 export const randomInteger = (min, max) => {
    let rand = min + Math.random() * (max - min);
@@ -35,19 +36,6 @@ const timer = (minBlock, secBlock) => {
 };
 
 let timerId;
-
-// btnStart.addEventListener("click", () => {
-//    timerId = setInterval(timer, 1000, minBlock, sekBlock);
-// });
-
-// btnStop.addEventListener("click", () => {
-//    clearInterval(timerId);
-//    const minBlockNew = document.querySelector(".time__min_new");
-//    const sekBlockNew = document.querySelector(".time__sek_new");
-
-//    minBlockNew.textContent = minBlock.textContent;
-//    sekBlockNew.textContent = sekBlock.textContent;
-// });
 
 const generatedCards = (qtyCard) => {
    const newCardsArr = [];
@@ -149,7 +137,10 @@ export const renderGamePage = (appEl, difficultValue) => {
                tryCounter = 0;
                openCardCounter += 2;
                if (openCardCounter === window.application.newCards.length) {
-                  setTimeout(alert, 500, "Вы выиграли");
+                  clearInterval(timerId);
+                  window.application.time = `${minBlock.textContent}:${secBlock.textContent}`;
+                  window.application.status = "win";
+                  goToPage(FINAL_PAGE);
                }
             } else {
                counter = 0;
@@ -177,7 +168,8 @@ export const renderGamePage = (appEl, difficultValue) => {
                if (tryCounter === 3) {
                   clearInterval(timerId);
                   window.application.time = `${minBlock.textContent}:${secBlock.textContent}`;
-                  setTimeout(alert, 500, "Вы проиграли");
+                  window.application.status = "lost";
+                  goToPage(FINAL_PAGE);
                }
             }
          }

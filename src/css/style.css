@@ -30,7 +30,7 @@
    width: 480px;
    border-radius: 12px;
    background: #c2f5ff;
-   padding: 50px 70px;
+   padding: 10px 70px 50px;
 }
 
 .popup__container {
@@ -45,10 +45,33 @@
    font-size: 40px;
    line-height: 48px;
    margin-bottom: 48px;
+   margin-top: 40px;
 }
 
 .popup__content-difficulty {
    margin-bottom: 67px;
+}
+
+.popup-image {
+   margin-bottom: 9px;
+   margin-top: 16px;
+}
+
+.popup__time-title {
+   font-size: 24px;
+   line-height: 32px;
+   margin-bottom: 10px;
+}
+
+.popup__time-text {
+   font-size: 64px;
+   line-height: 72px;
+   margin-bottom: 40px;
+}
+
+.popup__title_final {
+   margin-bottom: 28px;
+   margin-top: 0;
 }
 
 .difficulty__container {
@@ -148,9 +171,6 @@
    justify-content: space-between;
    align-items: center;
    margin-bottom: 48px;
-}
-
-.header__time {
 }
 
 .time__name {

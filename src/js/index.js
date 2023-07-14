@@ -10,7 +10,8 @@ const appEl = document.querySelector(".app");
 window.application = {
    level: "",
    newCards: "",
-   time: "00:00",
+   time: "00.00",
+   status: "",
 };
 
 export const goToPage = (newPage, data) => {
@@ -25,4 +26,4 @@ export const goToPage = (newPage, data) => {
    }
 };
 
-goToPage(CHANGE_DIFFICULTY_PAGE);
+goToPage(FINAL_PAGE);

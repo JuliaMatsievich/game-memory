@@ -3,21 +3,13 @@ export const renderFinalPage = (appEl) => {
       <div class="app__popup">
          <div class="popup">
             <div class="popup__container">
-               <div class="popup__title">Выбери сложность</div>
-                  <div class="popup__content popup__content-difficulty">
-                     <div class="difficulty__container">
-                        <div class="difficulty__block">
-                           <input id="difficult-1" type="radio" name="radio" value="1" class="difficulty__input">1
-                        </div>
-                     <div class="difficulty__block">
-                     <input id="difficult-2" type="radio" name="radio" value="2" class="difficulty__input">2
-                  </div>
-                  <div class="difficulty__block">
-                     <input id="difficult-3" type="radio" name="radio" value="3" class="difficulty__input">3
-                  </div>
-               </div>
-            </div>
-            <button class="button start__button">Старт</button>
+					<div class="popup-image">
+						<img src='./static/img/win.png'>	
+					</div>
+               <div class="popup__title popup__title_final">Вы выиграли</div>
+               <div class="popup__time-title">Затраченное время:</div>
+					<div class="popup__time-text">${window.application.time}</div>
+            	<button class="button button__start-again">Играть снова</button>
             </div>
          </div>
       </div>
