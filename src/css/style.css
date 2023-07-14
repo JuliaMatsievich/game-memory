@@ -259,3 +259,7 @@
    background: #9b9b9a;
    cursor: auto;
 }
+
+.game__disabled {
+   pointer-events: none;
+}

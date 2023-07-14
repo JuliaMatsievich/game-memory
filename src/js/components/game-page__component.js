@@ -78,7 +78,7 @@ export const renderGamePage = (appEl, difficultValue) => {
             <button class="button button__start-game">Начать</button>
          </div>
       </div>
-      <div class="game" disabled>
+      <div class="game game__disabled">
 
       </div>
    </div>
@@ -105,6 +105,10 @@ export const renderGamePage = (appEl, difficultValue) => {
             isOpenCard: false,
             newCards: window.application.newCards,
          });
+         setTimeout(() => {
+            gameBlock.classList.remove("game__disabled");
+         }, 5000);
+
          timerId = setInterval(timer, 1000, minBlock, secBlock);
       });
    };

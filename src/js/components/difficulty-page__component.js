@@ -30,7 +30,7 @@ export const renderChangeDifficultyPage = (appEl) => {
 
    const difficultyContainer = document.querySelector(".difficulty__container");
    difficultyContainer.addEventListener("click", (event) => {
-      startBtn.classList.remove('disabled');
+      startBtn.classList.remove("disabled");
       startBtn.disabled = false;
       const target = event.target;
 
@@ -49,8 +49,6 @@ export const renderChangeDifficultyPage = (appEl) => {
          difficultInputTarget.checked = !difficultInputTarget.checked;
       }
    });
-
-   
 
    startBtn.addEventListener("click", () => {
       goToPage(GAME_PAGE, window.application.level);
