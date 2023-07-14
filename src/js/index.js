@@ -26,4 +26,4 @@ export const goToPage = (newPage, data) => {
    }
 };
 
-goToPage(FINAL_PAGE);
+goToPage(CHANGE_DIFFICULTY_PAGE);
