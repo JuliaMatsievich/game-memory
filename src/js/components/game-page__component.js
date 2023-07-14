@@ -78,6 +78,7 @@ export const renderGamePage = (appEl, difficultValue) => {
             <button class="button button__start-game">Начать</button>
          </div>
       </div>
+      <div class="subtitle">У вас есть 3 права на ошибку</div>
       <div class="game game__disabled">
 
       </div>
@@ -144,6 +145,12 @@ export const renderGamePage = (appEl, difficultValue) => {
                   clearInterval(timerId);
                   window.application.time = `${minBlock.textContent}:${secBlock.textContent}`;
                   window.application.status = "win";
+                  renderGameField({
+                     gameBlock,
+                     isCloseCard: false,
+                     isOpenCard: true,
+                     newCards: window.application.newCards,
+                  });
                   goToPage(FINAL_PAGE);
                }
             } else {
@@ -173,6 +180,12 @@ export const renderGamePage = (appEl, difficultValue) => {
                   clearInterval(timerId);
                   window.application.time = `${minBlock.textContent}:${secBlock.textContent}`;
                   window.application.status = "lost";
+                  renderGameField({
+                     gameBlock,
+                     isCloseCard: false,
+                     isOpenCard: true,
+                     newCards: window.application.newCards,
+                  });
                   goToPage(FINAL_PAGE);
                }
             }

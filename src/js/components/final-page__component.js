@@ -4,7 +4,8 @@ import { CHANGE_DIFFICULTY_PAGE } from "../routes";
 export const renderFinalPage = (appEl) => {
    const status = window.application.status;
    const finalPageHtml = `
-      <div class="app__popup">
+		<div class="app__fon"></div>
+      <div class="app__popup app__popup_final">
          <div class="popup">
             <div class="popup__container">
 					<div class="popup-image">
@@ -20,7 +21,8 @@ export const renderFinalPage = (appEl) => {
          </div>
       </div>
 	`;
-   appEl.innerHTML = finalPageHtml;
+
+   appEl.insertAdjacentHTML("beforeend", finalPageHtml);
 
    const btnStartAgain = document.querySelector(".button__start-again");
    btnStartAgain.addEventListener("click", () => {
