@@ -11,6 +11,11 @@ module.exports = {
    mode: isProduction ? "production" : "development",
    module: {
       rules: [
+         {
+            test: /\.ts$/,
+            use: "ts-loader",
+            exclude: /node_modules/,
+         },
          { test: /\.css$/, use: [MiniCssExtractPlugin.loader, "css-loader"] },
          {
             test: /\.(png|svg|jpg|jpeg|gif)$/i,
@@ -26,6 +31,9 @@ module.exports = {
       path: path.resolve(__dirname, "dist"),
       filename: "bundle.js",
       clean: true,
+   },
+   resolve: {
+      extensions: [".ts", ".js"],
    },
    optimization: {
       minimizer: ["...", new CssMinimizerPlugin()],
