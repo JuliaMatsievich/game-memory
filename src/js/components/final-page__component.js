@@ -1,3 +1,6 @@
+import { goToPage } from "..";
+import { CHANGE_DIFFICULTY_PAGE } from "../routes";
+
 export const renderFinalPage = (appEl) => {
    const status = window.application.status;
    const finalPageHtml = `
@@ -18,4 +21,9 @@ export const renderFinalPage = (appEl) => {
       </div>
 	`;
    appEl.innerHTML = finalPageHtml;
+
+   const btnStartAgain = document.querySelector(".button__start-again");
+   btnStartAgain.addEventListener("click", () => {
+      goToPage(CHANGE_DIFFICULTY_PAGE);
+   });
 };

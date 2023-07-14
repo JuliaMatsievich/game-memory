@@ -78,7 +78,7 @@ export const renderGamePage = (appEl, difficultValue) => {
             <button class="button button__start-game">Начать</button>
          </div>
       </div>
-      <div class="game">
+      <div class="game" disabled>
 
       </div>
    </div>

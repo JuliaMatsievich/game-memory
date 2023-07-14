@@ -20,15 +20,18 @@ export const renderChangeDifficultyPage = (appEl) => {
                   </div>
                </div>
             </div>
-            <button class="button start__button">Старт</button>
+            <button class="button start__button disabled" disabled>Старт</button>
             </div>
          </div>
       </div>
 	`;
    appEl.innerHTML = changeDifficultyHtml;
+   const startBtn = document.querySelector(".start__button");
 
    const difficultyContainer = document.querySelector(".difficulty__container");
    difficultyContainer.addEventListener("click", (event) => {
+      startBtn.classList.remove('disabled');
+      startBtn.disabled = false;
       const target = event.target;
 
       const difficultInputTarget = target.querySelector("input");
@@ -47,7 +50,7 @@ export const renderChangeDifficultyPage = (appEl) => {
       }
    });
 
-   const startBtn = document.querySelector(".start__button");
+   
 
    startBtn.addEventListener("click", () => {
       goToPage(GAME_PAGE, window.application.level);

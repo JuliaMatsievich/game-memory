@@ -253,3 +253,9 @@
 .hidden {
    display: none;
 }
+
+.disabled,
+.disabled:hover {
+   background: #9b9b9a;
+   cursor: auto;
+}
