@@ -161,7 +161,7 @@
 }
 
 .time__min,
-.time__sek,
+.time__sec,
 .time__point {
    color: #fff;
    font-size: 64px;
@@ -171,7 +171,7 @@
 }
 
 .time__min::before,
-.time__sek::before {
+.time__sec::before {
    position: absolute;
    color: #fff;
    font-size: 16px;
@@ -185,8 +185,8 @@
    content: "min";
 }
 
-.time__sek::before {
-   content: "sek";
+.time__sec::before {
+   content: "sec";
 }
 
 .game {

@@ -15,6 +15,39 @@ export const shuffle = (arr) => {
    }
    return arr;
 };
+let sec = 0;
+let min = 0;
+
+const timer = (minBlock, secBlock) => {
+   sec++;
+   if (sec === 60) {
+      min++;
+      sec = 0;
+   }
+   secBlock.textContent = "0" + sec;
+   if (sec > 9) {
+      secBlock.textContent = sec;
+   }
+   minBlock.textContent = "0" + min;
+   if (min > 9) {
+      minBlock.textContent = min;
+   }
+};
+
+let timerId;
+
+// btnStart.addEventListener("click", () => {
+//    timerId = setInterval(timer, 1000, minBlock, sekBlock);
+// });
+
+// btnStop.addEventListener("click", () => {
+//    clearInterval(timerId);
+//    const minBlockNew = document.querySelector(".time__min_new");
+//    const sekBlockNew = document.querySelector(".time__sek_new");
+
+//    minBlockNew.textContent = minBlock.textContent;
+//    sekBlockNew.textContent = sekBlock.textContent;
+// });
 
 const generatedCards = (qtyCard) => {
    const newCardsArr = [];
@@ -32,7 +65,7 @@ const renderGameField = ({ gameBlock, isOpenCard, isCloseCard, newCards }) => {
       <img src="${pathToCard}/shirt.png" alt="" class="card__shirt ${
          isOpenCard ? "hidden" : ""
       }">
-      <img src="${card}" alt="" class="card__open ${
+      <img src="${pathToCard}/${card}" alt="" class="card__open ${
          isCloseCard ? "hidden" : ""
       }">
       </div>
@@ -51,7 +84,7 @@ export const renderGamePage = (appEl, difficultValue) => {
          <div class="header__time">
             <span class="time__min">00</span>
             <span class="time__point">.</span>
-            <span class="time__sek">00</span>
+            <span class="time__sec">00</span>
          </div>
          <div class="header__button">
             <button class="button button__start-game">Начать</button>
@@ -66,7 +99,8 @@ export const renderGamePage = (appEl, difficultValue) => {
    appEl.innerHTML = gameHtml;
 
    const gameBlock = document.querySelector(".game");
-
+   const minBlock = document.querySelector(".time__min");
+   const secBlock = document.querySelector(".time__sec");
    const clickBtnStartGame = (gameBlock) => {
       const btnStartGame = document.querySelector(".button__start-game");
       btnStartGame.addEventListener("click", () => {
@@ -83,6 +117,7 @@ export const renderGamePage = (appEl, difficultValue) => {
             isOpenCard: false,
             newCards: window.application.newCards,
          });
+         timerId = setInterval(timer, 1000, minBlock, secBlock);
       });
    };
    const cardsOpenArr = [];
@@ -140,6 +175,8 @@ export const renderGamePage = (appEl, difficultValue) => {
                }, 700);
 
                if (tryCounter === 3) {
+                  clearInterval(timerId);
+                  window.application.time = `${minBlock.textContent}:${secBlock.textContent}`;
                   setTimeout(alert, 500, "Вы проиграли");
                }
             }
