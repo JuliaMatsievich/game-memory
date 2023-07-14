@@ -1,5 +1,5 @@
-import { FINAL_PAGE, cards, pathToCard } from "../routes.js";
-import { goToPage } from "../index.js";
+import { FINAL_PAGE, cards, pathToCard } from "../routes";
+import { goToPage } from "../index";
 
 export const randomInteger = (min: number, max: number) => {
    let rand = min + Math.random() * (max - min);

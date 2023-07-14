@@ -1,14 +1,14 @@
 {
    "name": "game-memory",
    "version": "1.0.0",
-   "main": "index.js",
+   "main": "index.ts",
    "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
       "format": "prettier --write ./src/",
-      "lint:js": "eslint ./src/**/*.js",
+      "lint:ts": "tsc --noEmit",
       "lint:css": "stylelint ./src/**/*.css",
       "prepare": "husky install",
-      "lint": "npm run lint:js && npm run lint:css",
+      "lint": "npm run lint:ts && npm run lint:css",
       "build": "SET NODE_ENV='production' && webpack",
       "start": "webpack-dev-server --open"
    },

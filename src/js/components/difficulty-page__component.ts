@@ -1,5 +1,5 @@
-import { goToPage } from "../index.js";
-import { GAME_PAGE } from "../routes.js";
+import { goToPage } from "../index";
+import { GAME_PAGE } from "../routes";
 
 export const renderChangeDifficultyPage = (appEl:Element) => {
    const changeDifficultyHtml = `
