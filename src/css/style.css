@@ -10,7 +10,7 @@
    background-color: #004980;
    width: 100%;
    height: 100vh;
-   padding: 41px 26px;
+   position: relative;
 }
 
 .app__popup {
@@ -20,17 +20,34 @@
    height: 100vh;
 }
 
+.app__popup_final {
+   position: absolute;
+   top: 0;
+   left: 32%;
+}
+
+.app__fon {
+   position: absolute;
+   opacity: 0.9;
+   background: #004980;
+   top: 0;
+   z-index: 0;
+   width: 100%;
+   height: 100vh;
+}
+
 .app__game {
    height: 100vh;
    display: flex;
    flex-direction: column;
+   padding: 41px 26px;
 }
 
 .popup {
    width: 480px;
    border-radius: 12px;
    background: #c2f5ff;
-   padding: 50px 70px;
+   padding: 10px 70px 50px;
 }
 
 .popup__container {
@@ -45,10 +62,33 @@
    font-size: 40px;
    line-height: 48px;
    margin-bottom: 48px;
+   margin-top: 40px;
 }
 
 .popup__content-difficulty {
    margin-bottom: 67px;
+}
+
+.popup-image {
+   margin-bottom: 9px;
+   margin-top: 16px;
+}
+
+.popup__time-title {
+   font-size: 24px;
+   line-height: 32px;
+   margin-bottom: 10px;
+}
+
+.popup__time-text {
+   font-size: 64px;
+   line-height: 72px;
+   margin-bottom: 40px;
+}
+
+.popup__title_final {
+   margin-bottom: 28px;
+   margin-top: 0;
 }
 
 .difficulty__container {
@@ -150,9 +190,6 @@
    margin-bottom: 48px;
 }
 
-.header__time {
-}
-
 .time__name {
    color: #fff;
    font-size: 16px;
@@ -161,7 +198,7 @@
 }
 
 .time__min,
-.time__sek,
+.time__sec,
 .time__point {
    color: #fff;
    font-size: 64px;
@@ -171,7 +208,7 @@
 }
 
 .time__min::before,
-.time__sek::before {
+.time__sec::before {
    position: absolute;
    color: #fff;
    font-size: 16px;
@@ -185,8 +222,8 @@
    content: "min";
 }
 
-.time__sek::before {
-   content: "sek";
+.time__sec::before {
+   content: "sec";
 }
 
 .game {
@@ -232,4 +269,20 @@
 
 .hidden {
    display: none;
+}
+
+.disabled,
+.disabled:hover {
+   background: #9b9b9a;
+   cursor: auto;
+}
+
+.game__disabled {
+   pointer-events: none;
+}
+
+.subtitle {
+   text-align: center;
+   font-size: 28px;
+   color: white;
 }
