@@ -298,12 +298,12 @@
    height: 100%;
 }
 
-.card__open,
+/* .card__open,
 .card__shirt {
    backface-visibility: hidden;
    transition: -webkit-transform 0.3s;
    transition: transform 0.3s;
-}
+} */
 
 .card__open {
    background-color: #ff5078;
