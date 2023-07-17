@@ -50,12 +50,9 @@ const renderGameField = (render: Render) => {
    const cardsHtmlArr = render.newCards.map((card: string) => {
       return `
       <div class="game__card">
-      <img src="${pathToCard}/shirt.png" alt="" class="card__shirt ${
-         render.isOpenCard ? "hidden" : ""
-      }">
-      <img src="${pathToCard}/${card}" alt="" class="card__open ${
-         render.isCloseCard ? "hidden" : ""
-      }">
+         <img src="${pathToCard}/${card}" alt="" class="card__open }">
+         <img src="${pathToCard}/shirt.png" alt="" class="card__shirt}">
+         
       </div>
    `;
    });
@@ -157,18 +154,18 @@ export const renderGamePage = (appEl: Element, difficultValue: String) => {
                counter = 0;
                tryCounter += 1;
                setTimeout(() => {
-                  (cardsOpenArr[0]
-                     .querySelector(".card__shirt") as Element)
-                     .classList.remove("hidden");
-                  (cardsOpenArr[1]
-                     .querySelector(".card__shirt")  as Element)
-                     .classList.remove("hidden");
-                  (cardsOpenArr[0]
-                     .querySelector(".card__open") as Element)
-                     .classList.add("hidden");
-                  (cardsOpenArr[1]
-                     .querySelector(".card__open") as Element)
-                     .classList.add("hidden");
+                  (
+                     cardsOpenArr[0].querySelector(".card__shirt") as Element
+                  ).classList.remove("hidden");
+                  (
+                     cardsOpenArr[1].querySelector(".card__shirt") as Element
+                  ).classList.remove("hidden");
+                  (
+                     cardsOpenArr[0].querySelector(".card__open") as Element
+                  ).classList.add("hidden");
+                  (
+                     cardsOpenArr[1].querySelector(".card__open") as Element
+                  ).classList.add("hidden");
                }, 600);
 
                setTimeout(() => {
