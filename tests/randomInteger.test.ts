@@ -1,5 +1,4 @@
-import { randomInteger } from "../src/js/components/game-page__component";
-const { it, expect } = require("@jest/globals");
+import { randomInteger } from "../src/js/helpFunctions";
 
 it("should get number between min and max number", () => {
    const min = 1;

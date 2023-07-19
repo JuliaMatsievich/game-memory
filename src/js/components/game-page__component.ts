@@ -1,21 +1,14 @@
 import { FINAL_PAGE, cards, pathToCard } from "../routes";
 import { goToPage } from "../index";
+import { randomInteger,shuffle } from "../helpFunctions";
 
-export const randomInteger = (min: number, max: number) => {
-   let rand = min + Math.random() * (max - min);
-   return Math.floor(rand);
-};
+interface Render {
+   gameBlock: Element;
+   isOpenCard: boolean;
+   isCloseCard: boolean;
+   newCards: Array<string>;
+}
 
-export const shuffle = (arr: Array<any>) => {
-   let j, temp;
-   for (let i = arr.length - 1; i > 0; i--) {
-      j = Math.floor(Math.random() * (i + 1));
-      temp = arr[j];
-      arr[j] = arr[i];
-      arr[i] = temp;
-   }
-   return arr;
-};
 let sec: number = 0;
 let min: number = 0;
 
@@ -25,17 +18,17 @@ const timer = (minBlock: Element, secBlock: Element) => {
       min++;
       sec = 0;
    }
-   secBlock.textContent = "0" + <string>(<any>sec);
+   secBlock.textContent = "0" + sec;
    if (sec > 9) {
-      secBlock.textContent = <string>(<any>sec);
+      secBlock.textContent = String(sec);
    }
-   minBlock.textContent = "0" + <string>(<any>min);
+   minBlock.textContent = "0" + min;
    if (min > 9) {
-      minBlock.textContent = <string>(<any>min);
+      minBlock.textContent = String(min);
    }
 };
 
-let timerId: Number;
+let timerId: number;
 
 const generatedCards = (qtyCard: number) => {
    const newCardsArr = [];
@@ -157,18 +150,18 @@ export const renderGamePage = (appEl: Element, difficultValue: String) => {
                counter = 0;
                tryCounter += 1;
                setTimeout(() => {
-                  (cardsOpenArr[0]
-                     .querySelector(".card__shirt") as Element)
-                     .classList.remove("hidden");
-                  (cardsOpenArr[1]
-                     .querySelector(".card__shirt")  as Element)
-                     .classList.remove("hidden");
-                  (cardsOpenArr[0]
-                     .querySelector(".card__open") as Element)
-                     .classList.add("hidden");
-                  (cardsOpenArr[1]
-                     .querySelector(".card__open") as Element)
-                     .classList.add("hidden");
+                  (
+                     cardsOpenArr[0].querySelector(".card__shirt") as Element
+                  ).classList.remove("hidden");
+                  (
+                     cardsOpenArr[1].querySelector(".card__shirt") as Element
+                  ).classList.remove("hidden");
+                  (
+                     cardsOpenArr[0].querySelector(".card__open") as Element
+                  ).classList.add("hidden");
+                  (
+                     cardsOpenArr[1].querySelector(".card__open") as Element
+                  ).classList.add("hidden");
                }, 600);
 
                setTimeout(() => {
