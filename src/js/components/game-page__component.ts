@@ -12,7 +12,7 @@ interface Render {
 let sec: number = 0;
 let min: number = 0;
 
-const timer = (minBlock: Element, secBlock: Element) => {
+const timer = (minBlock: Element, secBlock: Element): void => {
    sec++;
    if (sec === 60) {
       min++;
@@ -30,7 +30,7 @@ const timer = (minBlock: Element, secBlock: Element) => {
 
 let timerId: number;
 
-const generatedCards = (qtyCard: number) => {
+const generatedCards = (qtyCard: number): Array<string> => {
    const newCardsArr = [];
 
    for (let i = 1; i <= qtyCard / 2; i++) {
@@ -39,7 +39,7 @@ const generatedCards = (qtyCard: number) => {
    return shuffle([...newCardsArr, ...newCardsArr]);
 };
 
-const renderGameField = (render: Render) => {
+const renderGameField = (render: Render): void => {
    const cardsHtmlArr = render.newCards.map((card: string) => {
       return `
       <div class="game__card">
@@ -58,7 +58,7 @@ const renderGameField = (render: Render) => {
    render.gameBlock.innerHTML = cardsHtml;
 };
 
-export const renderGamePage = (appEl: Element, difficultValue: String) => {
+export const renderGamePage = (appEl: Element, difficultValue: String): void => {
    const gameHtml = `
    <div class="app__game">
       <div class="header">
@@ -110,7 +110,7 @@ export const renderGamePage = (appEl: Element, difficultValue: String) => {
    const cardsOpenArrSrc: Array<string> = [];
    let tryCounter = 0;
    let openCardCounter = 0;
-   const clickCard = () => {
+   const clickCard = (): void => {
       const cardBlock = document.querySelector(".game");
       let counter = 0;
       cardBlock?.addEventListener("click", (event) => {

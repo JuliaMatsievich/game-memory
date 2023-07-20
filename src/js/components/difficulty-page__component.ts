@@ -1,7 +1,7 @@
 import { goToPage } from "../index";
 import { GAME_PAGE } from "../routes";
 
-export const renderChangeDifficultyPage = (appEl:Element) => {
+export const renderChangeDifficultyPage = (appEl:Element): void => {
    const changeDifficultyHtml = `
       <div class="app__popup">
          <div class="popup">
