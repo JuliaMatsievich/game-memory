@@ -1,6 +1,11 @@
-import { FINAL_PAGE, cards, pathToCard } from "../routes";
+import {
+   FINAL_PAGE,
+   cards,
+   pathToCard,
+   CHANGE_DIFFICULTY_PAGE,
+} from "../routes";
 import { goToPage } from "../index";
-import { randomInteger,shuffle } from "../helpFunctions";
+import { randomInteger, shuffle } from "../helpFunctions";
 
 interface Render {
    gameBlock: Element;
@@ -63,7 +68,7 @@ const renderGameFieldOpenCards = (gameBlock: Element): void => {
       isRotateCard: true,
       newCards: window.application.newCards,
    });
-}
+};
 
 const renderGameFieldClosedCards = (gameBlock: Element): void => {
    renderGameField({
@@ -71,9 +76,12 @@ const renderGameFieldClosedCards = (gameBlock: Element): void => {
       isRotateCard: false,
       newCards: window.application.newCards,
    });
-}
+};
 
-export const renderGamePage = (appEl: Element, difficultValue: String): void => {
+export const renderGamePage = (
+   appEl: Element,
+   difficultValue: String
+): void => {
    const gameHtml = `
    <div class="app__game">
       <div class="header">
@@ -84,6 +92,7 @@ export const renderGamePage = (appEl: Element, difficultValue: String): void => 
          </div>
          <div class="header__button">
             <button class="button button__start-game">Начать</button>
+            <button class="button button__difficulty">Выбрать сложность</button>
          </div>
       </div>
       <div class="subtitle">У вас есть 3 права на ошибку</div>
@@ -99,7 +108,14 @@ export const renderGamePage = (appEl: Element, difficultValue: String): void => 
    const minBlock = document.querySelector(".time__min");
    const secBlock = document.querySelector(".time__sec");
 
-   const clickBtnStartGame = (gameBlock: Element) => {
+   const clickBtnChangeDifficult = (): void => {
+      const buttonDifficulty = document.querySelector(".button__difficulty");
+      buttonDifficulty?.addEventListener("click", () => {
+         goToPage(CHANGE_DIFFICULTY_PAGE);
+      });
+   };
+
+   const clickBtnStartGame = (gameBlock: Element): void => {
       const btnStartGame = document.querySelector(".button__start-game");
       btnStartGame?.addEventListener("click", () => {
          renderGameFieldOpenCards(gameBlock);
@@ -145,14 +161,14 @@ export const renderGamePage = (appEl: Element, difficultValue: String): void => 
                cardsOpenArrSrc.splice(0, 2);
                tryCounter = 0;
                openCardCounter += 2;
-               
+
                if (openCardCounter === window.application.newCards.length) {
                   clearInterval(timerId as number);
                   window.application.time = `${minBlock?.textContent}:${secBlock?.textContent}`;
                   window.application.status = "win";
                   setTimeout(renderGameFieldOpenCards, 700, gameBlock);
                   setTimeout(() => {
-                     goToPage(FINAL_PAGE)
+                     goToPage(FINAL_PAGE);
                   }, 1000);
                }
             } else {
@@ -160,10 +176,14 @@ export const renderGamePage = (appEl: Element, difficultValue: String): void => 
                tryCounter += 1;
 
                setTimeout(() => {
-                  cardsOpenArr.forEach((card:Element) => {
-                     card.querySelector('.card__shirt')?.classList.remove('card__shirt_rotate');
-                     card.querySelector('.card__open')?.classList.remove('card__open_rotate');
-                  })
+                  cardsOpenArr.forEach((card: Element) => {
+                     card
+                        .querySelector(".card__shirt")
+                        ?.classList.remove("card__shirt_rotate");
+                     card
+                        .querySelector(".card__open")
+                        ?.classList.remove("card__open_rotate");
+                  });
                }, 600);
 
                setTimeout(() => {
@@ -177,9 +197,8 @@ export const renderGamePage = (appEl: Element, difficultValue: String): void => 
                   window.application.status = "lost";
                   setTimeout(renderGameFieldOpenCards, 700, gameBlock);
                   setTimeout(() => {
-                     goToPage(FINAL_PAGE)
+                     goToPage(FINAL_PAGE);
                   }, 1000);
-                 
                }
             }
          }
@@ -198,5 +217,6 @@ export const renderGamePage = (appEl: Element, difficultValue: String): void => 
    renderGameFieldClosedCards(gameBlock as Element);
    gameBlock?.classList.add(`game__difficult_${difficultValue}`);
    clickBtnStartGame(gameBlock as Element);
+   clickBtnChangeDifficult();
    clickCard();
 };
