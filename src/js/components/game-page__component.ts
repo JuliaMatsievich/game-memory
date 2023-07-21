@@ -43,11 +43,11 @@ const renderGameField = (render: Render): void => {
    const cardsHtmlArr = render.newCards.map((card: string) => {
       return `
       <div class="game__card">
-      <img src="${pathToCard}/shirt.png" alt="" class="card__shirt ${
-         render.isOpenCard ? "hidden" : ""
-      }">
       <img src="${pathToCard}/${card}" alt="" class="card__open ${
-         render.isCloseCard ? "hidden" : ""
+         render.isCloseCard ? "" : "card__open_rotate"
+      }">
+      <img src="${pathToCard}/shirt.png" alt="" class="card__shirt ${
+         render.isOpenCard ? "card__shirt_rotate" : ""
       }">
       </div>
    `;
@@ -106,10 +106,12 @@ export const renderGamePage = (appEl: Element, difficultValue: String): void => 
          timerId = setInterval(timer, 1000, minBlock, secBlock);
       });
    };
+
    const cardsOpenArr: Array<Element> = [];
    const cardsOpenArrSrc: Array<string> = [];
    let tryCounter = 0;
    let openCardCounter = 0;
+
    const clickCard = (): void => {
       const cardBlock = document.querySelector(".game");
       let counter = 0;
@@ -119,12 +121,15 @@ export const renderGamePage = (appEl: Element, difficultValue: String): void => 
          const cardClose = gameCard?.querySelector(".card__shirt");
          const cardOpen = gameCard?.querySelector(".card__open");
          const cardsSrc = cardOpen?.getAttribute("src");
+
          cardsOpenArr.push(gameCard as Element);
          cardsOpenArrSrc.push(cardsSrc as string);
+
          if (target.classList.contains("card__shirt")) {
-            cardClose?.classList.add("hidden");
-            cardOpen?.classList.remove("hidden");
+            cardClose?.classList.add("card__shirt_rotate");
+            cardOpen?.classList.add("card__open_rotate");
          }
+
          counter += 1;
 
          if (counter === 2) {
@@ -152,16 +157,16 @@ export const renderGamePage = (appEl: Element, difficultValue: String): void => 
                setTimeout(() => {
                   (
                      cardsOpenArr[0].querySelector(".card__shirt") as Element
-                  ).classList.remove("hidden");
+                  ).classList.remove("card__shirt_rotate");
                   (
                      cardsOpenArr[1].querySelector(".card__shirt") as Element
-                  ).classList.remove("hidden");
+                  ).classList.remove("card__shirt_rotate");
                   (
                      cardsOpenArr[0].querySelector(".card__open") as Element
-                  ).classList.add("hidden");
+                  ).classList.remove("card__open_rotate");
                   (
                      cardsOpenArr[1].querySelector(".card__open") as Element
-                  ).classList.add("hidden");
+                  ).classList.remove("card__open_rotate");
                }, 600);
 
                setTimeout(() => {

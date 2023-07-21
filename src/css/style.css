@@ -236,6 +236,7 @@
 
 .game__card {
    position: relative;
+   perspective: 1000px;
 }
 
 .game__card img {
@@ -245,7 +246,29 @@
    height: 100%;
    top: 0;
    left: 0;
+   transition: all 0.3s ease 0s;
+   backface-visibility: hidden;
 }
+
+.card__open {
+   transform: rotateY(180deg);
+}
+
+/* .game__card:hover .card__shirt {
+   transform: rotateY(180deg);
+} */
+
+.card__shirt_rotate {
+   transform: rotateY(180deg);
+}
+
+.card__open_rotate {
+   transform: rotateY(360deg);
+}
+
+/* .game__card:hover .card__open {
+   transform: rotateY(360deg);
+} */
 
 .game__difficult_1 {
    grid-template: repeat(3, minmax(auto, 133px)) / repeat(4, minmax(30px, 95px));
