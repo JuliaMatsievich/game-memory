@@ -57,6 +57,22 @@ const renderGameField = (render: Render): void => {
    render.gameBlock.innerHTML = cardsHtml;
 };
 
+const renderGameFieldOpenCards = (gameBlock: Element): void => {
+   renderGameField({
+      gameBlock,
+      isRotateCard: true,
+      newCards: window.application.newCards,
+   });
+}
+
+const renderGameFieldClosedCards = (gameBlock: Element): void => {
+   renderGameField({
+      gameBlock,
+      isRotateCard: false,
+      newCards: window.application.newCards,
+   });
+}
+
 export const renderGamePage = (appEl: Element, difficultValue: String): void => {
    const gameHtml = `
    <div class="app__game">
@@ -86,17 +102,8 @@ export const renderGamePage = (appEl: Element, difficultValue: String): void => 
    const clickBtnStartGame = (gameBlock: Element) => {
       const btnStartGame = document.querySelector(".button__start-game");
       btnStartGame?.addEventListener("click", () => {
-         renderGameField({
-            gameBlock,
-            isRotateCard: true,
-            newCards: window.application.newCards,
-         });
-
-         setTimeout(renderGameField, 5000, {
-            gameBlock,
-            isRotateCard: false,
-            newCards: window.application.newCards,
-         });
+         renderGameFieldOpenCards(gameBlock);
+         setTimeout(renderGameFieldClosedCards, 5000, gameBlock);
          setTimeout(() => {
             gameBlock.classList.remove("game__disabled");
          }, 5000);
@@ -113,6 +120,7 @@ export const renderGamePage = (appEl: Element, difficultValue: String): void => 
    const clickCard = (): void => {
       const cardBlock = document.querySelector(".game");
       let counter = 0;
+
       cardBlock?.addEventListener("click", (event) => {
          const target = event.target as Element;
          const gameCard = target.closest(".game__card");
@@ -137,17 +145,12 @@ export const renderGamePage = (appEl: Element, difficultValue: String): void => 
                cardsOpenArrSrc.splice(0, 2);
                tryCounter = 0;
                openCardCounter += 2;
+               
                if (openCardCounter === window.application.newCards.length) {
                   clearInterval(timerId as number);
                   window.application.time = `${minBlock?.textContent}:${secBlock?.textContent}`;
                   window.application.status = "win";
-                  setTimeout(() => {
-                     renderGameField({
-                        gameBlock: gameBlock as Element,
-                        isRotateCard: true,
-                        newCards: window.application.newCards,
-                     });
-                  }, 700);  
+                  setTimeout(renderGameFieldOpenCards, 700, gameBlock);
                   setTimeout(() => {
                      goToPage(FINAL_PAGE)
                   }, 1000);
@@ -179,13 +182,7 @@ export const renderGamePage = (appEl: Element, difficultValue: String): void => 
                   clearInterval(timerId as number);
                   window.application.time = `${minBlock?.textContent}:${secBlock?.textContent}`;
                   window.application.status = "lost";
-                  setTimeout(() => {
-                     renderGameField({
-                        gameBlock: gameBlock as Element,
-                        isRotateCard: true,
-                        newCards: window.application.newCards,
-                     });
-                  }, 700);                  
+                  setTimeout(renderGameFieldOpenCards, 700, gameBlock);
                   setTimeout(() => {
                      goToPage(FINAL_PAGE)
                   }, 1000);
@@ -211,12 +208,7 @@ export const renderGamePage = (appEl: Element, difficultValue: String): void => 
    }
 
    window.application.newCards = generatedCards(qtyCard);
-   renderGameField({
-      gameBlock: gameBlock as Element,
-      isRotateCard: false,
-      newCards: window.application.newCards,
-   });
-
+   renderGameFieldClosedCards(gameBlock as Element);
    gameBlock?.classList.add(`game__difficult_${difficultValue}`);
    clickBtnStartGame(gameBlock as Element);
    clickCard();
