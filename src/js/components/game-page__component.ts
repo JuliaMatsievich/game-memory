@@ -1,43 +1,36 @@
 import { FINAL_PAGE, cards, pathToCard } from "../routes";
 import { goToPage } from "../index";
+import { randomInteger,shuffle } from "../helpFunctions";
 
-export const randomInteger = (min: number, max: number) => {
-   let rand = min + Math.random() * (max - min);
-   return Math.floor(rand);
-};
+interface Render {
+   gameBlock: Element;
+   isOpenCard: boolean;
+   isCloseCard: boolean;
+   newCards: Array<string>;
+}
 
-export const shuffle = (arr: Array<any>) => {
-   let j, temp;
-   for (let i = arr.length - 1; i > 0; i--) {
-      j = Math.floor(Math.random() * (i + 1));
-      temp = arr[j];
-      arr[j] = arr[i];
-      arr[i] = temp;
-   }
-   return arr;
-};
 let sec: number = 0;
 let min: number = 0;
 
-const timer = (minBlock: Element, secBlock: Element) => {
+const timer = (minBlock: Element, secBlock: Element): void => {
    sec++;
    if (sec === 60) {
       min++;
       sec = 0;
    }
-   secBlock.textContent = "0" + <string>(<any>sec);
+   secBlock.textContent = "0" + sec;
    if (sec > 9) {
-      secBlock.textContent = <string>(<any>sec);
+      secBlock.textContent = String(sec);
    }
-   minBlock.textContent = "0" + <string>(<any>min);
+   minBlock.textContent = "0" + min;
    if (min > 9) {
-      minBlock.textContent = <string>(<any>min);
+      minBlock.textContent = String(min);
    }
 };
 
-let timerId: Number;
+let timerId: number;
 
-const generatedCards = (qtyCard: number) => {
+const generatedCards = (qtyCard: number): Array<string> => {
    const newCardsArr = [];
 
    for (let i = 1; i <= qtyCard / 2; i++) {
@@ -46,7 +39,7 @@ const generatedCards = (qtyCard: number) => {
    return shuffle([...newCardsArr, ...newCardsArr]);
 };
 
-const renderGameField = (render: Render) => {
+const renderGameField = (render: Render): void => {
    const cardsHtmlArr = render.newCards.map((card: string) => {
       return `
       <div class="game__card">
@@ -65,7 +58,7 @@ const renderGameField = (render: Render) => {
    render.gameBlock.innerHTML = cardsHtml;
 };
 
-export const renderGamePage = (appEl: Element, difficultValue: String) => {
+export const renderGamePage = (appEl: Element, difficultValue: String): void => {
    const gameHtml = `
    <div class="app__game">
       <div class="header">
@@ -117,7 +110,7 @@ export const renderGamePage = (appEl: Element, difficultValue: String) => {
    const cardsOpenArrSrc: Array<string> = [];
    let tryCounter = 0;
    let openCardCounter = 0;
-   const clickCard = () => {
+   const clickCard = (): void => {
       const cardBlock = document.querySelector(".game");
       let counter = 0;
       cardBlock?.addEventListener("click", (event) => {
@@ -157,18 +150,18 @@ export const renderGamePage = (appEl: Element, difficultValue: String) => {
                counter = 0;
                tryCounter += 1;
                setTimeout(() => {
-                  (cardsOpenArr[0]
-                     .querySelector(".card__shirt") as Element)
-                     .classList.remove("hidden");
-                  (cardsOpenArr[1]
-                     .querySelector(".card__shirt")  as Element)
-                     .classList.remove("hidden");
-                  (cardsOpenArr[0]
-                     .querySelector(".card__open") as Element)
-                     .classList.add("hidden");
-                  (cardsOpenArr[1]
-                     .querySelector(".card__open") as Element)
-                     .classList.add("hidden");
+                  (
+                     cardsOpenArr[0].querySelector(".card__shirt") as Element
+                  ).classList.remove("hidden");
+                  (
+                     cardsOpenArr[1].querySelector(".card__shirt") as Element
+                  ).classList.remove("hidden");
+                  (
+                     cardsOpenArr[0].querySelector(".card__open") as Element
+                  ).classList.add("hidden");
+                  (
+                     cardsOpenArr[1].querySelector(".card__open") as Element
+                  ).classList.add("hidden");
                }, 600);
 
                setTimeout(() => {

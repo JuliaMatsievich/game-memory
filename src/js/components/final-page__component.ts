@@ -1,7 +1,7 @@
 import { goToPage } from "..";
 import { CHANGE_DIFFICULTY_PAGE } from "../routes";
 
-export const renderFinalPage = (appEl:Element) => {
+export const renderFinalPage = (appEl:Element): void => {
    const status = window.application.status;
    const finalPageHtml = `
 		<div class="app__fon"></div>
