@@ -43,12 +43,9 @@ const renderGameField = (render: Render): void => {
    const cardsHtmlArr = render.newCards.map((card: string) => {
       return `
       <div class="game__card">
-      <img src="${pathToCard}/shirt.png" alt="" class="card__shirt ${
-         render.isOpenCard ? "hidden" : ""
-      }">
-      <img src="${pathToCard}/${card}" alt="" class="card__open ${
-         render.isCloseCard ? "hidden" : ""
-      }">
+         <img src="${pathToCard}/${card}" alt="" class="card__open }">
+         <img src="${pathToCard}/shirt.png" alt="" class="card__shirt}">
+         
       </div>
    `;
    });

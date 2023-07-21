@@ -286,3 +286,38 @@
    font-size: 28px;
    color: white;
 }
+
+/* анимация переворота */
+
+.card__open,
+.card__shirt {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+}
+
+/* .card__open,
+.card__shirt {
+   backface-visibility: hidden;
+   transition: -webkit-transform 0.3s;
+   transition: transform 0.3s;
+} */
+
+.card__open {
+   background-color: #ff5078;
+}
+
+.card__shirt {
+   background-color: #1e1e1e;
+   transform: rotateY(-180deg);
+}
+
+.game__card:hover .card__open {
+   transform: rotateY(-180deg);
+}
+
+.game__card:hover .card__shirt {
+   transform: rotateY(0);
+}
