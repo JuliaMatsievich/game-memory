@@ -159,12 +159,6 @@ export const renderGamePage = (appEl: Element, difficultValue: String): void => 
                counter = 0;
                tryCounter += 1;
 
-               // cardsOpenArr.forEach((card:Element) => {
-               //    console.log(card);
-               //    card.querySelector('.card__shirt')?.classList.remove('card__shirt_rotate');
-               //    card.querySelector('.card__open')?.classList.remove('card__open_rotate');
-               // })
-               
                setTimeout(() => {
                   cardsOpenArr.forEach((card:Element) => {
                      card.querySelector('.card__shirt')?.classList.remove('card__shirt_rotate');
@@ -194,17 +188,11 @@ export const renderGamePage = (appEl: Element, difficultValue: String): void => 
 
    let qtyCard: number = 0;
 
-   if (difficultValue === "1") {
-      qtyCard = 6;
-   }
+   if (difficultValue === "1") qtyCard = 6;
 
-   if (difficultValue === "2") {
-      qtyCard = 12;
-   }
+   if (difficultValue === "2") qtyCard = 12;
 
-   if (difficultValue === "3") {
-      qtyCard = 18;
-   }
+   if (difficultValue === "3") qtyCard = 18;
 
    window.application.newCards = generatedCards(qtyCard);
    renderGameFieldClosedCards(gameBlock as Element);
