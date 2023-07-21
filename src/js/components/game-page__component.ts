@@ -123,7 +123,10 @@ export const renderGamePage = (
          setTimeout(() => {
             gameBlock.classList.remove("game__disabled");
          }, 5000);
-
+         setTimeout(() => {
+            btnStartGame?.classList.add("disabled");
+            (btnStartGame  as HTMLButtonElement).disabled = true;
+         },500);
          timerId = setInterval(timer, 1000, minBlock, secBlock);
       });
    };
