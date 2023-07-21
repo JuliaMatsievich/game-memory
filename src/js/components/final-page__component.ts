@@ -1,4 +1,4 @@
-import { goToPage } from "..";
+import { goToPage } from "../index";
 import { CHANGE_DIFFICULTY_PAGE } from "../routes";
 
 export const renderFinalPage = (appEl:Element): void => {

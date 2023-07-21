@@ -254,10 +254,6 @@
    transform: rotateY(180deg);
 }
 
-/* .game__card:hover .card__shirt {
-   transform: rotateY(180deg);
-} */
-
 .card__shirt_rotate {
    transform: rotateY(180deg);
 }
@@ -266,21 +262,17 @@
    transform: rotateY(360deg);
 }
 
-/* .game__card:hover .card__open {
-   transform: rotateY(360deg);
-} */
-
 .game__difficult_1 {
-   grid-template: repeat(3, minmax(auto, 133px)) / repeat(4, minmax(30px, 95px));
+   grid-template: repeat(2, minmax(auto, 133px)) / repeat(3, minmax(30px, 95px));
 }
 
 .game__difficult_2 {
-   grid-template: repeat(3, minmax(auto, 133px)) / repeat(6, minmax(30px, 95px));
+   grid-template: repeat(3, minmax(auto, 133px)) / repeat(4, minmax(30px, 95px));
    grid-auto-flow: row;
 }
 
 .game__difficult_3 {
-   grid-template: repeat(4, minmax(auto, 133px)) / repeat(9, minmax(30px, 95px));
+   grid-template: repeat(3, minmax(auto, 133px)) / repeat(6, minmax(30px, 95px));
 }
 
 .game__card_open {

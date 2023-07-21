@@ -4,8 +4,7 @@ import { randomInteger,shuffle } from "../helpFunctions";
 
 interface Render {
    gameBlock: Element;
-   isOpenCard: boolean;
-   isCloseCard: boolean;
+   isRotateCard: boolean;
    newCards: Array<string>;
 }
 
@@ -44,10 +43,10 @@ const renderGameField = (render: Render): void => {
       return `
       <div class="game__card">
       <img src="${pathToCard}/${card}" alt="" class="card__open ${
-         render.isCloseCard ? "" : "card__open_rotate"
+         render.isRotateCard ? "card__open_rotate" : ""
       }">
       <img src="${pathToCard}/shirt.png" alt="" class="card__shirt ${
-         render.isOpenCard ? "card__shirt_rotate" : ""
+         render.isRotateCard ? "card__shirt_rotate" : ""
       }">
       </div>
    `;
@@ -83,20 +82,19 @@ export const renderGamePage = (appEl: Element, difficultValue: String): void => 
    const gameBlock = document.querySelector(".game");
    const minBlock = document.querySelector(".time__min");
    const secBlock = document.querySelector(".time__sec");
+
    const clickBtnStartGame = (gameBlock: Element) => {
       const btnStartGame = document.querySelector(".button__start-game");
       btnStartGame?.addEventListener("click", () => {
          renderGameField({
             gameBlock,
-            isCloseCard: false,
-            isOpenCard: true,
+            isRotateCard: true,
             newCards: window.application.newCards,
          });
 
          setTimeout(renderGameField, 5000, {
             gameBlock,
-            isCloseCard: true,
-            isOpenCard: false,
+            isRotateCard: false,
             newCards: window.application.newCards,
          });
          setTimeout(() => {
@@ -143,29 +141,32 @@ export const renderGamePage = (appEl: Element, difficultValue: String): void => 
                   clearInterval(timerId as number);
                   window.application.time = `${minBlock?.textContent}:${secBlock?.textContent}`;
                   window.application.status = "win";
-                  renderGameField({
-                     gameBlock: gameBlock as Element,
-                     isCloseCard: false,
-                     isOpenCard: true,
-                     newCards: window.application.newCards,
-                  });
-                  goToPage(FINAL_PAGE);
+                  setTimeout(() => {
+                     renderGameField({
+                        gameBlock: gameBlock as Element,
+                        isRotateCard: true,
+                        newCards: window.application.newCards,
+                     });
+                  }, 700);  
+                  setTimeout(() => {
+                     goToPage(FINAL_PAGE)
+                  }, 1000);
                }
             } else {
                counter = 0;
                tryCounter += 1;
                setTimeout(() => {
                   (
-                     cardsOpenArr[0].querySelector(".card__shirt") as Element
+                     cardsOpenArr[0]?.querySelector(".card__shirt") as Element
                   ).classList.remove("card__shirt_rotate");
                   (
-                     cardsOpenArr[1].querySelector(".card__shirt") as Element
+                     cardsOpenArr[1]?.querySelector(".card__shirt") as Element
                   ).classList.remove("card__shirt_rotate");
                   (
-                     cardsOpenArr[0].querySelector(".card__open") as Element
+                     cardsOpenArr[0]?.querySelector(".card__open") as Element
                   ).classList.remove("card__open_rotate");
                   (
-                     cardsOpenArr[1].querySelector(".card__open") as Element
+                     cardsOpenArr[1]?.querySelector(".card__open") as Element
                   ).classList.remove("card__open_rotate");
                }, 600);
 
@@ -178,13 +179,17 @@ export const renderGamePage = (appEl: Element, difficultValue: String): void => 
                   clearInterval(timerId as number);
                   window.application.time = `${minBlock?.textContent}:${secBlock?.textContent}`;
                   window.application.status = "lost";
-                  renderGameField({
-                     gameBlock: gameBlock as Element,
-                     isCloseCard: false,
-                     isOpenCard: true,
-                     newCards: window.application.newCards,
-                  });
-                  goToPage(FINAL_PAGE);
+                  setTimeout(() => {
+                     renderGameField({
+                        gameBlock: gameBlock as Element,
+                        isRotateCard: true,
+                        newCards: window.application.newCards,
+                     });
+                  }, 700);                  
+                  setTimeout(() => {
+                     goToPage(FINAL_PAGE)
+                  }, 1000);
+                 
                }
             }
          }
@@ -194,24 +199,24 @@ export const renderGamePage = (appEl: Element, difficultValue: String): void => 
    let qtyCard: number = 0;
 
    if (difficultValue === "1") {
-      qtyCard = 12;
+      qtyCard = 6;
    }
 
    if (difficultValue === "2") {
-      qtyCard = 18;
+      qtyCard = 12;
    }
 
    if (difficultValue === "3") {
-      qtyCard = 36;
+      qtyCard = 18;
    }
 
    window.application.newCards = generatedCards(qtyCard);
    renderGameField({
       gameBlock: gameBlock as Element,
-      isCloseCard: true,
-      isOpenCard: false,
+      isRotateCard: false,
       newCards: window.application.newCards,
    });
+
    gameBlock?.classList.add(`game__difficult_${difficultValue}`);
    clickBtnStartGame(gameBlock as Element);
    clickCard();
