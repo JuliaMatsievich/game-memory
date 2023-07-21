@@ -158,19 +158,18 @@ export const renderGamePage = (appEl: Element, difficultValue: String): void => 
             } else {
                counter = 0;
                tryCounter += 1;
+
+               // cardsOpenArr.forEach((card:Element) => {
+               //    console.log(card);
+               //    card.querySelector('.card__shirt')?.classList.remove('card__shirt_rotate');
+               //    card.querySelector('.card__open')?.classList.remove('card__open_rotate');
+               // })
+               
                setTimeout(() => {
-                  (
-                     cardsOpenArr[0]?.querySelector(".card__shirt") as Element
-                  ).classList.remove("card__shirt_rotate");
-                  (
-                     cardsOpenArr[1]?.querySelector(".card__shirt") as Element
-                  ).classList.remove("card__shirt_rotate");
-                  (
-                     cardsOpenArr[0]?.querySelector(".card__open") as Element
-                  ).classList.remove("card__open_rotate");
-                  (
-                     cardsOpenArr[1]?.querySelector(".card__open") as Element
-                  ).classList.remove("card__open_rotate");
+                  cardsOpenArr.forEach((card:Element) => {
+                     card.querySelector('.card__shirt')?.classList.remove('card__shirt_rotate');
+                     card.querySelector('.card__open')?.classList.remove('card__open_rotate');
+                  })
                }, 600);
 
                setTimeout(() => {
