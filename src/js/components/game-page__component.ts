@@ -4,8 +4,7 @@ import { randomInteger,shuffle } from "../helpFunctions";
 
 interface Render {
    gameBlock: Element;
-   isOpenCard: boolean;
-   isCloseCard: boolean;
+   isRotateCard: boolean;
    newCards: Array<string>;
 }
 
@@ -43,11 +42,11 @@ const renderGameField = (render: Render): void => {
    const cardsHtmlArr = render.newCards.map((card: string) => {
       return `
       <div class="game__card">
-      <img src="${pathToCard}/shirt.png" alt="" class="card__shirt ${
-         render.isOpenCard ? "hidden" : ""
-      }">
       <img src="${pathToCard}/${card}" alt="" class="card__open ${
-         render.isCloseCard ? "hidden" : ""
+         render.isRotateCard ? "card__open_rotate" : ""
+      }">
+      <img src="${pathToCard}/shirt.png" alt="" class="card__shirt ${
+         render.isRotateCard ? "card__shirt_rotate" : ""
       }">
       </div>
    `;
@@ -57,6 +56,22 @@ const renderGameField = (render: Render): void => {
 
    render.gameBlock.innerHTML = cardsHtml;
 };
+
+const renderGameFieldOpenCards = (gameBlock: Element): void => {
+   renderGameField({
+      gameBlock,
+      isRotateCard: true,
+      newCards: window.application.newCards,
+   });
+}
+
+const renderGameFieldClosedCards = (gameBlock: Element): void => {
+   renderGameField({
+      gameBlock,
+      isRotateCard: false,
+      newCards: window.application.newCards,
+   });
+}
 
 export const renderGamePage = (appEl: Element, difficultValue: String): void => {
    const gameHtml = `
@@ -83,22 +98,12 @@ export const renderGamePage = (appEl: Element, difficultValue: String): void => 
    const gameBlock = document.querySelector(".game");
    const minBlock = document.querySelector(".time__min");
    const secBlock = document.querySelector(".time__sec");
+
    const clickBtnStartGame = (gameBlock: Element) => {
       const btnStartGame = document.querySelector(".button__start-game");
       btnStartGame?.addEventListener("click", () => {
-         renderGameField({
-            gameBlock,
-            isCloseCard: false,
-            isOpenCard: true,
-            newCards: window.application.newCards,
-         });
-
-         setTimeout(renderGameField, 5000, {
-            gameBlock,
-            isCloseCard: true,
-            isOpenCard: false,
-            newCards: window.application.newCards,
-         });
+         renderGameFieldOpenCards(gameBlock);
+         setTimeout(renderGameFieldClosedCards, 5000, gameBlock);
          setTimeout(() => {
             gameBlock.classList.remove("game__disabled");
          }, 5000);
@@ -106,25 +111,31 @@ export const renderGamePage = (appEl: Element, difficultValue: String): void => 
          timerId = setInterval(timer, 1000, minBlock, secBlock);
       });
    };
+
    const cardsOpenArr: Array<Element> = [];
    const cardsOpenArrSrc: Array<string> = [];
    let tryCounter = 0;
    let openCardCounter = 0;
+
    const clickCard = (): void => {
       const cardBlock = document.querySelector(".game");
       let counter = 0;
+
       cardBlock?.addEventListener("click", (event) => {
          const target = event.target as Element;
          const gameCard = target.closest(".game__card");
          const cardClose = gameCard?.querySelector(".card__shirt");
          const cardOpen = gameCard?.querySelector(".card__open");
          const cardsSrc = cardOpen?.getAttribute("src");
+
          cardsOpenArr.push(gameCard as Element);
          cardsOpenArrSrc.push(cardsSrc as string);
+
          if (target.classList.contains("card__shirt")) {
-            cardClose?.classList.add("hidden");
-            cardOpen?.classList.remove("hidden");
+            cardClose?.classList.add("card__shirt_rotate");
+            cardOpen?.classList.add("card__open_rotate");
          }
+
          counter += 1;
 
          if (counter === 2) {
@@ -134,34 +145,25 @@ export const renderGamePage = (appEl: Element, difficultValue: String): void => 
                cardsOpenArrSrc.splice(0, 2);
                tryCounter = 0;
                openCardCounter += 2;
+               
                if (openCardCounter === window.application.newCards.length) {
                   clearInterval(timerId as number);
                   window.application.time = `${minBlock?.textContent}:${secBlock?.textContent}`;
                   window.application.status = "win";
-                  renderGameField({
-                     gameBlock: gameBlock as Element,
-                     isCloseCard: false,
-                     isOpenCard: true,
-                     newCards: window.application.newCards,
-                  });
-                  goToPage(FINAL_PAGE);
+                  setTimeout(renderGameFieldOpenCards, 700, gameBlock);
+                  setTimeout(() => {
+                     goToPage(FINAL_PAGE)
+                  }, 1000);
                }
             } else {
                counter = 0;
                tryCounter += 1;
+
                setTimeout(() => {
-                  (
-                     cardsOpenArr[0].querySelector(".card__shirt") as Element
-                  ).classList.remove("hidden");
-                  (
-                     cardsOpenArr[1].querySelector(".card__shirt") as Element
-                  ).classList.remove("hidden");
-                  (
-                     cardsOpenArr[0].querySelector(".card__open") as Element
-                  ).classList.add("hidden");
-                  (
-                     cardsOpenArr[1].querySelector(".card__open") as Element
-                  ).classList.add("hidden");
+                  cardsOpenArr.forEach((card:Element) => {
+                     card.querySelector('.card__shirt')?.classList.remove('card__shirt_rotate');
+                     card.querySelector('.card__open')?.classList.remove('card__open_rotate');
+                  })
                }, 600);
 
                setTimeout(() => {
@@ -173,13 +175,11 @@ export const renderGamePage = (appEl: Element, difficultValue: String): void => 
                   clearInterval(timerId as number);
                   window.application.time = `${minBlock?.textContent}:${secBlock?.textContent}`;
                   window.application.status = "lost";
-                  renderGameField({
-                     gameBlock: gameBlock as Element,
-                     isCloseCard: false,
-                     isOpenCard: true,
-                     newCards: window.application.newCards,
-                  });
-                  goToPage(FINAL_PAGE);
+                  setTimeout(renderGameFieldOpenCards, 700, gameBlock);
+                  setTimeout(() => {
+                     goToPage(FINAL_PAGE)
+                  }, 1000);
+                 
                }
             }
          }
@@ -188,25 +188,14 @@ export const renderGamePage = (appEl: Element, difficultValue: String): void => 
 
    let qtyCard: number = 0;
 
-   if (difficultValue === "1") {
-      qtyCard = 12;
-   }
+   if (difficultValue === "1") qtyCard = 6;
 
-   if (difficultValue === "2") {
-      qtyCard = 18;
-   }
+   if (difficultValue === "2") qtyCard = 12;
 
-   if (difficultValue === "3") {
-      qtyCard = 36;
-   }
+   if (difficultValue === "3") qtyCard = 18;
 
    window.application.newCards = generatedCards(qtyCard);
-   renderGameField({
-      gameBlock: gameBlock as Element,
-      isCloseCard: true,
-      isOpenCard: false,
-      newCards: window.application.newCards,
-   });
+   renderGameFieldClosedCards(gameBlock as Element);
    gameBlock?.classList.add(`game__difficult_${difficultValue}`);
    clickBtnStartGame(gameBlock as Element);
    clickCard();
