@@ -1,4 +1,5 @@
 # Карточная игра "Мемори"
+https://juliamatsievich.github.io/game-memory/
 
 ## Цель игры
 Выбрать все пары карт
