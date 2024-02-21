@@ -4,7 +4,7 @@
 ## Технологии
 - HTML
 - CSS
-- Javascript
+- Typescript
 - Webpack
 
 ## Сайт игры
